@@ -1,0 +1,14 @@
+<nb-layout>
+  <nb-layout-header>
+    <nb-user [name]=FullName title="Front-end developer" [picture]=url [nbContextMenu]="items"
+      nbContextMenuTag="my-context-menu">
+    </nb-user>
+  </nb-layout-header>
+  <nb-sidebar class="m-2 "><nb-card>
+      <nb-menu [items]="menuItems"> </nb-menu>
+    </nb-card>
+  </nb-sidebar>
+  <nb-layout-column class="colored-column-basic">
+    <router-outlet></router-outlet>
+  </nb-layout-column>
+</nb-layout>

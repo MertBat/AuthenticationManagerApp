@@ -1,0 +1,11 @@
+:host nb-layout-header ::ng-deep nav {
+  justify-content: flex-end;
+}
+nb-card{
+  border: 0 !important;
+}
+
+
+
+
+

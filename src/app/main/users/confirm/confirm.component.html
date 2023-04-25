@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Confirmation</h1>
+<div mat-dialog-content style="height: 180px;">
+  <p>
+    Please type your password to confirm <u> {{ operation }} </u> operation
+  </p>
+  <form [formGroup]="confirmForm" (ngSubmit)="confirm()">
+    <mat-form-field>
+      <input matInput placeholder="password" type="password" formControlName="password" />
+      <mat-error *ngIf="confirmForm.controls['password'].valid && confirmForm.controls['password'].touched">Password not correct</mat-error>
+    </mat-form-field>
+    <div mat-dialog-actions>
+      <button mat-button (click)="onNoClick()">No Thanks</button>
+      <button mat-button type="submit" [disabled]="!confirmForm.valid">
+        confirm
+      </button>
+    </div>
+  </form>
+</div>
+<mat-progress-bar class="progress" mode="indeterminate" *ngIf="loading"></mat-progress-bar>

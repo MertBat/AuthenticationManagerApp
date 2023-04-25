@@ -1,0 +1,473 @@
+{
+  "account": [
+    {
+      "name": "mert",
+      "authority": "admin",
+      "id": 1,
+      "password": "mert11",
+      "url": "data:image/jpeg;base64,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",
+      "userName": "mert",
+      "userSurname": "batmaz",
+      "eMail": "mert@hotmail.com"
+    },
+    {
+      "id": 2,
+      "authority": "moderator",
+      "name": "Tonya",
+      "password": "celil1",
+      "userName": "Serrano",
+      "userSurname": "Johns",
+      "eMail": "serranojohns@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 4,
+      "authority": "intern",
+      "name": "catherine",
+      "password": "catherine1",
+      "userName": "Alyssa",
+      "userSurname": "Mcneil",
+      "eMail": "alyssamcneil@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 6,
+      "authority": "user",
+      "name": "Haley",
+      "password": "celil1",
+      "userName": "Mccall",
+      "userSurname": "Sykes",
+      "eMail": "mccallsykes@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 9,
+      "authority": "user",
+      "name": "Marcella",
+      "password": "celil1",
+      "userName": "English",
+      "userSurname": "Chandler",
+      "eMail": "englishchandler@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 10,
+      "authority": "user",
+      "name": "Kirsten",
+      "password": "celil1",
+      "userName": "Andrea",
+      "userSurname": "Wallace",
+      "eMail": "andreawallace@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 12,
+      "authority": "user",
+      "name": "Cooke",
+      "password": "celil1",
+      "userName": "Carolyn",
+      "userSurname": "Chase",
+      "eMail": "carolynchase@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 13,
+      "authority": "user",
+      "name": "Katheryn",
+      "password": "celil1",
+      "userName": "Bettye",
+      "userSurname": "Burris",
+      "eMail": "bettyeburris@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 15,
+      "authority": "user",
+      "name": "Miriam",
+      "password": "celil1",
+      "userName": "Muriel",
+      "userSurname": "Woods",
+      "eMail": "murielwoods@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 17,
+      "authority": "user",
+      "name": "Vargas",
+      "password": "celil1",
+      "userName": "Rosemary",
+      "userSurname": "Moreno",
+      "eMail": "rosemarymoreno@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 18,
+      "authority": "user",
+      "name": "Duffy",
+      "password": "celil1",
+      "userName": "Ethel",
+      "userSurname": "Ferrell",
+      "eMail": "ethelferrell@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 19,
+      "authority": "user",
+      "name": "Helga",
+      "password": "celil1",
+      "userName": "Louella",
+      "userSurname": "Kim",
+      "eMail": "louellakim@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 20,
+      "authority": "user",
+      "name": "Douglas",
+      "password": "celil1",
+      "userName": "Dolores",
+      "userSurname": "Kramer",
+      "eMail": "doloreskramer@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 21,
+      "authority": "user",
+      "name": "Jannie",
+      "password": "celil1",
+      "userName": "Branch",
+      "userSurname": "May",
+      "eMail": "branchmay@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 22,
+      "authority": "user",
+      "name": "Heather",
+      "password": "celil1",
+      "userName": "Ashley",
+      "userSurname": "Knight",
+      "eMail": "ashleyknight@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 23,
+      "authority": "user",
+      "name": "Hunter",
+      "password": "celil1",
+      "userName": "Mayra",
+      "userSurname": "Stout",
+      "eMail": "mayrastout@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 24,
+      "authority": "user",
+      "name": "Winters",
+      "password": "celil1",
+      "userName": "Fay",
+      "userSurname": "Perez",
+      "eMail": "fayperez@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 25,
+      "authority": "user",
+      "name": "Regina",
+      "password": "celil1",
+      "userName": "Coffey",
+      "userSurname": "Oconnor",
+      "eMail": "coffeyoconnor@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 26,
+      "authority": "user",
+      "name": "Sexton",
+      "password": "celil1",
+      "userName": "Hahn",
+      "userSurname": "Warner",
+      "eMail": "hahnwarner@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 27,
+      "authority": "user",
+      "name": "Alford",
+      "password": "celil1",
+      "userName": "Amelia",
+      "userSurname": "Hicks",
+      "eMail": "ameliahicks@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 29,
+      "authority": "user",
+      "name": "Daphne",
+      "password": "celil1",
+      "userName": "Hanson",
+      "userSurname": "Wagner",
+      "eMail": "hansonwagner@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 30,
+      "authority": "user",
+      "name": "Compton",
+      "password": "celil1",
+      "userName": "Natasha",
+      "userSurname": "Weber",
+      "eMail": "natashaweber@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 31,
+      "authority": "user",
+      "name": "Stanley",
+      "password": "celil1",
+      "userName": "Liz",
+      "userSurname": "Barron",
+      "eMail": "lizbarron@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 32,
+      "authority": "user",
+      "name": "Weber",
+      "password": "celil1",
+      "userName": "Hyde",
+      "userSurname": "Mathews",
+      "eMail": "hydemathews@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 33,
+      "authority": "user",
+      "name": "Gracie",
+      "password": "celil1",
+      "userName": "Georgina",
+      "userSurname": "Sanford",
+      "eMail": "georginasanford@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 34,
+      "authority": "user",
+      "name": "Jennie",
+      "password": "celil1",
+      "userName": "Karla",
+      "userSurname": "Rasmussen",
+      "eMail": "karlarasmussen@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 35,
+      "authority": "user",
+      "name": "Smith",
+      "password": "celil1",
+      "userName": "Washington",
+      "userSurname": "Stuart",
+      "eMail": "washingtonstuart@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 36,
+      "authority": "user",
+      "name": "Holcomb",
+      "password": "celil1",
+      "userName": "Humphrey",
+      "userSurname": "Byrd",
+      "eMail": "humphreybyrd@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 38,
+      "authority": "user",
+      "name": "Alyce",
+      "password": "celil1",
+      "userName": "Wendi",
+      "userSurname": "Berry",
+      "eMail": "wendiberry@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 39,
+      "authority": "user",
+      "name": "Rosa",
+      "password": "celil1",
+      "userName": "Clarice",
+      "userSurname": "Lewis",
+      "eMail": "claricelewis@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 40,
+      "authority": "user",
+      "name": "Matthews",
+      "password": "celil1",
+      "userName": "Trisha",
+      "userSurname": "Medina",
+      "eMail": "trishamedina@magneato.com",
+      "url": ""
+    },
+    {
+      "id": 46,
+      "authority": "user",
+      "name": "Farley",
+      "password": "celil1",
+      "userName": "Jessie",
+      "userSurname": "Riley",
+      "eMail": "jessieriley@magneato.com",
+      "url": ""
+    },
+    {
+      "name": "efe",
+      "eMail": "efe@hotmail.com",
+      "userName": "efe",
+      "userSurname": "bank",
+      "authority": "user",
+      "password": "efe1",
+      "id": 47,
+      "url": "https://media.licdn.com/dms/image/D4E03AQHy_aplle-m-A/profile-displayphoto-shrink_800_800/0/1666969599913?e=2147483647&v=beta&t=1gryJsCEAWdMUxjTiBG6XSN88tozmpqJfqTgysPaRwY"
+    },
+    {
+      "name": "hasan",
+      "eMail": "haasn@hotmail.com",
+      "userName": "hasan",
+      "userSurname": "ataş",
+      "authority": "moderator",
+      "password": "hasan1",
+      "id": 48
+    }
+  ],
+  "roles": [
+    {
+      "id": 0,
+      "role": "admin",
+      "addProduct": true,
+      "changeProduct": true,
+      "removeProduct": true,
+      "userAdd": true,
+      "userChange": true,
+      "userDelete": true,
+      "roleAdd": true,
+      "roleChange": true,
+      "roleDelete": true
+    },
+    {
+      "id": 1,
+      "role": "moderator",
+      "addProduct": true,
+      "changeProduct": true,
+      "removeProduct": true,
+      "userAdd": true,
+      "userChange": true,
+      "userDelete": false,
+      "roleAdd": true,
+      "roleChange": true,
+      "roleDelete": true
+    },
+    {
+      "id": 2,
+      "role": "user",
+      "addProduct": false,
+      "changeProduct": false,
+      "removeProduct": false,
+      "userAdd": false,
+      "userChange": false,
+      "userDelete": false,
+      "roleAdd": true,
+      "roleChange": true,
+      "roleDelete": true
+    },
+    {
+      "id": 3,
+      "role": "intern",
+      "addProduct": true,
+      "changeProduct": true,
+      "removeProduct": true,
+      "userAdd": false,
+      "userChange": false,
+      "userDelete": true,
+      "roleAdd": false,
+      "roleChange": false,
+      "roleDelete": false
+    }
+  ],
+  "productList": [
+    {
+      "id": 0,
+      "name": "Harry Potter",
+      "category": "book",
+      "url": "https://productimages.hepsiburada.net/s/218/550/110000197563110.jpg/format:webp",
+      "price": 70,
+      "description": "When Dumbledore arrives at Privet Drive one summer night to collect Harry Potter, his wand hand is blackened and shrivelled, but he does not reveal why. Secrets and suspicion are spreading through the wizarding world, and Hogwarts itself is not safe. Harry is convinced that Malfoy bears the Dark Mark: there is a Death Eater amongst them. Harry will need powerful magic and true friends as he explores Voldemort’s darkest secrets, and Dumbledore prepares him to face his destiny."
+    },
+    {
+      "id": 1,
+      "name": "The Lord of the Rings 3",
+      "category": "book",
+      "url": "https://productimages.hepsiburada.net/s/7/550/8797506601010.jpg/format:webp",
+      "price": 150,
+      "description": "Concluding the story begun in The Hobbit, this is the final part of Tolkien's epic masterpiece, The Lord of the Rings, featuring an exclusive cover image from the film, the definitive text, and a detailed map of Middle-earth. The armies of the Dark Lord Sauron are massing as his evil shadow spreads ever wider. "
+    },
+    {
+      "id": 2,
+      "name": "Reeder P13 Blue Max 2022 128 GB",
+      "category": "phone",
+      "url": "https://productimages.hepsiburada.net/s/202/550/110000175851325.jpg/format:webp",
+      "price": 5600,
+      "description": "When we look at the box contents of the Reeder P13 Blue Max 2022, the phone itself, the charging adapter and the data cable welcome us. This phone, which has a simple design, weighs 180 grams and is 8.8 mm."
+    },
+    {
+      "name": "Skechers Thermo-Flash",
+      "url": "https://productimages.hepsiburada.net/s/76/222-222/110000017879933.jpg/format:webp",
+      "price": 3000,
+      "category": "shoe",
+      "description": "Shock absorbing, fiery luminous midsole is used. Breathable athletic mesh and synthetic upper are used. It has an adjustable hook and loop closure for a perfect fit. A flexible outsole is used that provides grip. Skechers® logo detail available. It has an on/off switch for the lights. It is designed as an easy-to-wear, stretch laced, lightweight sneaker.",
+      "id": 3
+    },
+    {
+      "id": 4,
+      "name": "Logitech M170 Wireless Mouse - grey ",
+      "category": "mouse",
+      "url": "https://productimages.hepsiburada.net/s/153/550/110000109045215.jpg/format:webp",
+      "price": 120,
+      "description": "It provides wireless freedom up to 10 meters with its powerful and reliable USB receiver."
+    },
+    {
+      "id": 5,
+      "name": "Corsair Gaming Glaive RGB Aluminum Optical 16000DPI Black Gaming Mouse",
+      "category": "mouse",
+      "url": "https://productimages.hepsiburada.net/s/5/550/9679304425522.jpg/format:webp",
+      "price": 13700,
+      "description": "The GLAIVE RGB PRO gaming mouse combines high performance with high comfort with a contoured shape ideal for long gaming sessions. Choose from three interchangeable thumb grips for a perfectly tailored fit."
+    },
+    {
+      "name": "O-An",
+      "url": "https://productimages.hepsiburada.net/s/390/550/110000413681359.jpg/format:webp",
+      "price": 38,
+      "category": "book",
+      "description": "Bu kitapla sizinle NeuroFormat uygulamalarının 2023 yılında geldiği noktayı paylaşıyorum. Zira uygulama eski kitaplarımdan çok değişti ve daha gelişti. Beni tanırsınız, tevazuyu severim ama iddialı bir şey söyleyeceğim: NeuroFormat’ın bugün geldiğimiz noktada tüm dünyada travma çözmek konusundaki en etkili, en hızlı, kapsam derinliği en geniş yöntem olduğunu söyleyebilirim. Sizi temin ederim, bu kitapta anlattığım analiz şeklini ve yöntemi gerçek anlamda kavramayı başarırsanız, tüm travmalarınızı çok daha derin ve eksiksiz biçimde çözebileceksiniz. ",
+      "id": 6
+    }
+  ],
+  "category": [
+    {
+      "id": 0,
+      "name": "book"
+    },
+    {
+      "id": 1,
+      "name": "mouse"
+    },
+    {
+      "id": 2,
+      "name": "phone"
+    },
+    {
+      "id": 3,
+      "name": "shoe"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 1;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+.card{
+  min-width: 650px;
+}
+#changeButton{
+  min-width: 150px;
+}

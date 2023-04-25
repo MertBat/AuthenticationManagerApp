@@ -1,0 +1,32 @@
+<div class="container row">
+    <div class="col-sm-3" style="min-width: 200px;" *ngFor="let role of roles">
+        <h6> {{role.role}} </h6>
+        <ul>
+            <li><mat-checkbox [(ngModel)]="role.addProduct">Add Product</mat-checkbox></li>
+            <li><mat-checkbox [(ngModel)]="role.changeProduct">Change Product</mat-checkbox></li>
+            <li><mat-checkbox [(ngModel)]="role.removeProduct">Remove Product</mat-checkbox></li>
+            <li><mat-checkbox [(ngModel)]="role.userAdd">User Add</mat-checkbox></li>
+            <li><mat-checkbox [(ngModel)]="role.userChange">User Change</mat-checkbox></li>
+            <li><mat-checkbox [(ngModel)]="role.userDelete">User Delete</mat-checkbox></li>
+            <li><mat-checkbox [(ngModel)]="role.roleAdd">Role Add</mat-checkbox></li>
+            <li><mat-checkbox [(ngModel)]="role.roleChange">Role Chang</mat-checkbox></li>
+            <li><mat-checkbox [(ngModel)]="role.roleDelete">Role Delete</mat-checkbox></li>
+            <div class="buttons">
+                <button mat-mini-fab aria-label="add new profile" class="addIcon"
+                    style="background-color: rgb(198, 7, 7); " (click)="deleteRole(role.id)" [disabled]="!taskBlocker.roleDelete">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button mat-mini-fab aria-label="save" style="background-color: rgb(5, 132, 41); "
+                    (click)="saveRole(role.id)" [disabled]="!taskBlocker.roleChange">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </ul>
+        <hr>
+    </div>
+</div>
+<div class="add-icon">
+    <button mat-fab aria-label="add new profile" (click)="addRole()" [disabled]="!taskBlocker.roleAdd">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>

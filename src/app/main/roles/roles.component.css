@@ -1,0 +1,27 @@
+ul {
+  list-style-type: none;
+  margin-top: 4px;
+}
+
+li {
+  margin-top: 6px;
+}
+.add-icon{
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+}
+
+.buttons {
+  padding-top: 10px;
+}
+
+.addIcon{
+  margin-right: 6px;
+}
+
+.save-button {
+  position: fixed;
+  bottom: 30px;
+  right: 90px;
+}

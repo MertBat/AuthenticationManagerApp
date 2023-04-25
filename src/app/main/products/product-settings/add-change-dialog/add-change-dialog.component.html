@@ -1,0 +1,116 @@
+<div class="form-container">
+  <h2 mat-dialog-title>Preview Screen</h2>
+  <div class="row">
+    <nb-flip-card style="width: 400px; height: 400px; left: 50px;" [flipped]="flipped">
+      <nb-card-front>
+        <nb-card class="nbCard">
+          <div class="some">
+            <div class="child" style="max-width: 400">
+              <img
+                [src]="productForm.value.url"
+              />
+            </div>
+          </div>
+          <div class="row addToCard">
+            <div class="col-sm-4">
+              <p
+                style="
+                  font-weight: bold;
+                  color: #ff4081;
+                  text-align: center;
+                  font-size: large;
+                "
+              >
+                {{ productForm.value.price}}₺
+              </p>
+            </div>
+            <button mat-flat-button color="accent" class="col-sm-4">
+              Add to card
+            </button>
+          </div>
+        </nb-card>
+      </nb-card-front>
+      <nb-card-back>
+        <nb-card style="min-height: 400px">
+          <nb-card-body>
+            <h4> {{productForm.value.name}}</h4>
+            <hr />
+            <p>
+              {{productForm.value.description}}
+            </p>
+          </nb-card-body>
+        </nb-card>
+      </nb-card-back>
+    </nb-flip-card>
+  </div>
+  <hr />
+  <mat-dialog-content style="height: 350px">
+    <form class="row" [formGroup]="productForm" (ngSubmit)="saveProduct()">
+      <mat-form-field appearance="standard" class="col-sm-6">
+        <mat-label>Product Name</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="Enter product name"
+          formControlName="name"
+          (click)="flipped =true"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="standard" class="col-sm-6">
+        <mat-label>Product picture (1:1)</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="Enter picture url"
+          formControlName="url"
+          (click)="flipped =false"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="standard" class="col-sm-6">
+        <mat-label>Price</mat-label>
+        <input
+          matInput
+          type="number"
+          placeholder="Enter price of product"
+          formControlName="price"
+          (click)="flipped =false"
+        />
+      </mat-form-field>
+      <mat-form-field
+        appearance="fill"
+        hintLabel="Category name required"
+        class="col-sm-6"
+      >
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="category">
+          <mat-option
+            [value]="category.name"
+            *ngFor="let category of categories"
+          >
+            {{ category.name }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="standard" class="col-sm-12">
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          placeholder="Description"
+          formControlName="description"
+          (click)="flipped =true"
+        ></textarea>
+        <mat-hint text-align="end">{{productForm.value.description.length}}/650</mat-hint>
+      </mat-form-field>
+      <mat-dialog-actions>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="productForm.invalid"
+        >
+          Save
+        </button>
+      </mat-dialog-actions>
+    </form>
+  </mat-dialog-content>
+</div>

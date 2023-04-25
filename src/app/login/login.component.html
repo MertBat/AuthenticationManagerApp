@@ -1,0 +1,36 @@
+<div class="background" >
+  <form [formGroup]="examinationForm" (ngSubmit)="signIn()" class="position-absolute top-50 start-50 translate-middle"
+    [@fadeIn]>
+    <div class="form-group m-4">
+      <label for="inputName">Name</label>
+      <input class="form-control" type="text" formControlName="name" name="name" id="name" placeholder="user name"
+        formControlName="name" />
+      <div class="alert alert-danger p-1" *ngIf="
+          examinationForm.get('name')?.hasError('required') &&
+          examinationForm.get('name')?.dirty
+        ">
+        Need name
+      </div>
+    </div>
+    <div class="form-group m-4">
+      <label for="inputPassword">Password</label>
+      <input class="form-control" type="password" formControlName="password" name="password" id="password"
+        placeholder="password" formControlName="password" />
+      <div class="alert alert-danger p-1" *ngIf="
+          examinationForm.get('password')?.hasError('required') &&
+          examinationForm.get('password')?.dirty
+        ">
+        Need password
+      </div>
+    </div>
+    <div class="d-flex justify-content-between">
+      <button type="submit" class="btn btn-primary m-4" [disabled]="examinationForm.invalid">
+        Login
+      </button>
+      <button type="submit" class="btn btn-primary m-4" (click)="navigateSignUp()" >
+        Create Account
+      </button>
+    </div>
+  </form>
+</div>
+<app-splash-screen *ngIf="loading"></app-splash-screen>

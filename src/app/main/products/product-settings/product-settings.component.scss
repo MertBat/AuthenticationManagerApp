@@ -1,0 +1,23 @@
+table {
+    width: 100%;
+}
+
+tr.element-row:hover {
+    background: whitesmoke;
+}
+.add-icon{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+  .raised-button {
+    background: red;
+    color: aliceblue;
+    margin: 7px;
+  }
+  .table-header {
+    width: 90%;
+    margin: auto;
+    text-align: right;
+    margin-bottom: 10px;
+  }

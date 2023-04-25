@@ -1,0 +1,43 @@
+p {
+  font-family: Lato;
+}
+table {
+width: 100%;
+
+}
+.btn-edit {
+  text-align: right;
+}
+h2 {
+  text-align: center;
+  padding-top: 20px;
+}
+
+.table-header {
+  width: 90%;
+  margin: auto;
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+.button-remove-rows {
+  background: red;
+  color: #ffffff;
+  margin-right: 5px;
+}
+
+::ng-deep .mat-form-field-infix {
+  width: 100% !important;
+}
+
+.form-input {
+  padding-right: 5px;
+}
+.add-icon{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+.add-icon:hover {
+  text-shadow: 6px 6px black;
+}

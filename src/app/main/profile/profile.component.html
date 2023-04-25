@@ -1,0 +1,192 @@
+<h2>Profile information</h2>
+<nb-card class="card">
+  <nb-card-body>
+    <nb-tabset>
+      <nb-tab tabTitle="Users Information">
+        <form
+          [formGroup]="uInformationForm"
+          (ngSubmit)="changeInformation()"
+          class="form-inline row"
+        >
+          <div class="form-group mx-sm-3 col-sm-4">
+            <label for="name" class="sr-only m-1">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Name"
+              name="userName"
+              formControlName="name"
+            />
+            <div
+              class="alert alert-danger p-1"
+              *ngIf="
+                uInformationForm.get('name')?.hasError('required') &&
+                uInformationForm.get('name')?.dirty
+              "
+            >
+              Need name
+            </div>
+          </div>
+          <div class="form-group mx-sm-3 col-sm-4">
+            <label for="surname" class="sr-only m-1">Surname</label>
+            <input
+              type="text"
+              class="form-control"
+              id="surname"
+              placeholder="Surname"
+              name="userSurname"
+              formControlName="surname"
+            />
+            <div
+              class="alert alert-danger p-1"
+              *ngIf="
+                uInformationForm.get('surname')?.hasError('required') &&
+                uInformationForm.get('surname')?.dirty
+              "
+            >
+              Need surname
+            </div>
+          </div>
+          <br />
+          <div class="form-group mx-sm-3 col-sm-4">
+            <label for="email" class="sr-only m-1">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="E-Mail"
+              name="eMail"
+              formControlName="email"
+            />
+            <div
+              class="alert alert-danger p-1"
+              *ngIf="
+                uInformationForm.get('email')?.hasError('required') &&
+                uInformationForm.get('email')?.dirty
+              "
+            >
+              Need E-mail
+            </div>
+          </div>
+          <div class="form-group mx-sm-3 col-sm-4">
+            <label for="profileFoto" class="sr-only m-1">Profile foto</label>
+            <input
+              type="profileFoto"
+              class="form-control"
+              id="profileFoto"
+              placeholder="profileFoto"
+              name="profileFoto"
+              formControlName="profileFoto"
+            />
+            <div
+              class="alert alert-danger p-1"
+              *ngIf="
+                uInformationForm.get('profileFoto')?.hasError('required') &&
+                uInformationForm.get('profileFoto')?.dirty
+              "
+            >
+              Profile Foto
+            </div>
+          </div>
+          <div class="w-100"></div>
+          <br />
+          <button
+            type="submit"
+            class="btn btn-primary m-4 col-sm-2"
+            id="changeButton"
+            [disabled]="uInformationForm.invalid"
+          >
+            Change information
+          </button>
+        </form>
+      </nb-tab>
+      <nb-tab tabTitle="Change Password">
+        <form
+          [formGroup]="PasswordChangeForm"
+          (submit)="changePassword()"
+          class="form-inline row"
+        >
+          <div class="form-group mx-sm-3 mb-2" style="width: 300px">
+            <label for="password" class="sr-only m-1">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="Password"
+              name="password"
+              formControlName="password"
+              minlength="4"
+              maxlength="12"
+            />
+            <div
+              class="alert alert-danger p-1"
+              *ngIf="
+                PasswordChangeForm.get('password')?.hasError('required') &&
+                PasswordChangeForm.get('password')?.dirty
+              "
+            >
+              Need password
+            </div>
+          </div>
+          <div class="w-100"></div>
+          <div class="form-group mx-sm-3 mb-2" style="width: 300px">
+            <label for="newPassword1" class="sr-only m-1">New password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="newPassword1"
+              placeholder="Type new password"
+              name="newPassword1"
+              formControlName="newPassword1"
+              minlength="4"
+              maxlength="12"
+            />
+            <div
+              class="alert alert-danger p-1"
+              *ngIf="
+                PasswordChangeForm.get('newPassword1')?.hasError('required') &&
+                PasswordChangeForm.get('newPassword1')?.dirty
+              "
+            >
+              Need new password
+            </div>
+          </div>
+          <div class="w-100"></div>
+          <div class="form-group mx-sm-3 mb-2" style="width: 300px">
+            <label for="newPassword2" class="sr-only m-1">New password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="newPassword2"
+              placeholder="Type new password again"
+              name="newPassword2"
+              formControlName="newPassword2"
+              minlength="4"
+              maxlength="12"
+            />
+            <div
+              class="alert alert-danger p-1"
+              *ngIf="
+                PasswordChangeForm.get('newPassword2')?.hasError('required') &&
+                PasswordChangeForm.get('newPassword2')?.dirty
+              "
+            >
+              Need new password again
+            </div>
+          </div>
+          <div class="w-100"></div>
+          <button
+            type="submit"
+            class="btn btn-primary m-4 col-sm-2"
+            style="width: fit-content"
+            [disabled]="PasswordChangeForm.invalid"
+          >
+            Change password
+          </button>
+          <div class="w-100"></div>
+        </form>
+      </nb-tab>
+    </nb-tabset>
+  </nb-card-body>
+</nb-card>
