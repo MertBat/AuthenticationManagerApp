@@ -72,7 +72,8 @@ export class MainComponent {
         },
         {
           title: 'Product Settings',
-          link: "product-settings"
+          link: "product-settings",
+          hidden: !this.accountService.getPermissionToControlPanel()
         },
       ],
     },

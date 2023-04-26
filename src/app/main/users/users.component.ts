@@ -42,6 +42,9 @@ export class UsersComponent implements OnInit {
   confirmPassword!: boolean;
   validation: any = {}
   selectedAccountName!: string
+  addUserPermission!: boolean
+  deleteUserPermission!: boolean
+  editUserPermission!: boolean
 
   constructor(
     private accountService: AccountService,
@@ -60,6 +63,11 @@ export class UsersComponent implements OnInit {
         });
       }
     });
+    const accountPermissions = this.accountService.getAccountPermissions()[0].permissions;
+    this.addUserPermission = accountPermissions.some((p: any) => p == "userAdd");
+    this.deleteUserPermission = accountPermissions.some((p: any) => p == "userDelete");
+    this.editUserPermission = accountPermissions.some((p: any) => p == "userChange");
+
   }
   refresh() {
     this.accountService.getAccounts().subscribe((data) => {

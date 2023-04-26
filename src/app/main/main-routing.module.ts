@@ -25,7 +25,7 @@ const routes: Routes = [
       { path: 'shoe', component: ShoeComponent },
       { path: 'mouse', component: MouseComponent },
       { path: 'profile', component: ProfileComponent },
-      { path: 'product-settings', component: ProductSettingsComponent },
+      { path: 'product-settings', component: ProductSettingsComponent, canActivate:[ControlpanelGuardService] },
       {
         path: 'controlPanel', canActivate:[ControlpanelGuardService], children: [
           { path: 'users', component: UsersComponent },

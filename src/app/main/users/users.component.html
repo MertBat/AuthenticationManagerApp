@@ -13,10 +13,10 @@
           {{ element[col.key] }}
         </span>
         <div class="btn-edit" *ngSwitchCase="'isEdit'">
-          <button mat-button (click)="editRow(element)" >
+          <button mat-button (click)="editRow(element)" [disabled]="!editUserPermission">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-button class="button-remove" (click)="deleteRow(element)" >
+          <button mat-button class="button-remove" (click)="deleteRow(element)" [disabled]="!deleteUserPermission">
             <mat-icon>delete</mat-icon>
           </button>
         </div>
@@ -34,7 +34,8 @@
           </mat-select>
         </mat-form-field>
         <div class="btn-edit" *ngSwitchCase="'isEdit'">
-          <button mat-button (click)="editedRow(element)" [disabled]="validationControl(element.id)">Done</button>
+          <button mat-button (click)="editedRow(element)" [disabled]="validationControl(element.id)"
+            >Done</button>
         </div>
       </div>
     </td>
@@ -46,7 +47,7 @@
   </tr>
 </table>
 <div class="add-icon">
-  <button mat-fab aria-label="add new profile" (click)="addRow()" >
+  <button mat-fab aria-label="add new profile" (click)="addRow()" [disabled]="!addUserPermission">
     <mat-icon>add</mat-icon>
   </button>
 </div>

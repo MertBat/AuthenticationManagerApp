@@ -2,14 +2,17 @@
     <div class="col-sm-3" style="min-width: 200px;" *ngFor="let role of roles">
         <h6> {{role.role}} </h6>
         <ul>
-            <li *ngFor="let permission of permissions"><mat-checkbox [checked]="includesEqual(role.permissions, permission.name)" (change)="checkCondition($event)"> {{permission.name}} </mat-checkbox></li>
+            <li *ngFor="let permission of permissions"><mat-checkbox
+                    [checked]="includesEqual(role.permissions, permission.name)" (change)="checkCondition($event)">
+                    {{permission.name}} </mat-checkbox></li>
             <div class="buttons">
                 <button mat-mini-fab aria-label="add new profile" class="addIcon"
-                    style="background-color: rgb(198, 7, 7); " (click)="deleteRole(role.id)" >
+                    style="background-color: rgb(198, 7, 7); " (click)="deleteRole(role.id)"
+                    [disabled]="!deleteRolePermission">
                     <mat-icon>delete</mat-icon>
                 </button>
                 <button mat-mini-fab aria-label="save" style="background-color: rgb(5, 132, 41); "
-                    (click)="saveRole(role.id)" >
+                    (click)="saveRole(role.id)" [disabled]="!editRolePermission">
                     <mat-icon>save</mat-icon>
                 </button>
             </div>
@@ -18,7 +21,7 @@
     </div>
 </div>
 <div class="add-icon">
-    <button mat-fab aria-label="add new profile" (click)="addRole()" >
+    <button mat-fab aria-label="add new profile" (click)="addRole()" [disabled]="!addRolePermission">
         <mat-icon>add</mat-icon>
     </button>
 </div>

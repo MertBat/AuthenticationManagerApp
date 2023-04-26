@@ -3,7 +3,7 @@
     <mat-label>Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
   </mat-form-field>
-  <button mat-raised-button class="raised-button" (click)="removeSelectedRows()" [disabled]="selectedProductsId.length == 0 ? true : false">
+  <button mat-raised-button class="raised-button" (click)="removeSelectedRows()" [disabled]="selectedProductsId.length == 0 ? true : false || !deleteProductPermission">
     Remove Rows
   </button>
 </div>
@@ -11,7 +11,7 @@
   <ng-container matColumnDef="position">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element">
-      <mat-checkbox (change)="SelectProduct(element.id, $event)" >
+      <mat-checkbox (change)="SelectProduct(element.id, $event)">
       </mat-checkbox>
     </td>
   </ng-container>
@@ -35,7 +35,7 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns" class="element-row"></tr>
 </table>
 <div class="add-icon">
-  <button mat-fab aria-label="add new profile" (click)="addProduct()">
+  <button mat-fab aria-label="add new profile" (click)="addProduct()" [disabled]="!addProductPermission">
     <mat-icon>add</mat-icon>
   </button>
 </div>

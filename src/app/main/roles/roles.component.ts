@@ -17,11 +17,15 @@ export class RolesComponent implements OnInit {
   roles!: any;
   permissions!: any
   PermissionCheck!: any
+  addRolePermission!: boolean
+  deleteRolePermission!: boolean
+  editRolePermission!: boolean
 
 
   constructor(
     private roleService: RoleService,
     public matDialog: MatDialog,
+    private accountService: AccountService,
     private permissionService: PermissionService
   ) { }
 
@@ -29,6 +33,10 @@ export class RolesComponent implements OnInit {
     this.permissionService.getPermissions().subscribe(data => {
       this.permissions = data
     })
+    const accountPermissions = this.accountService.getAccountPermissions()[0].permissions
+    this.addRolePermission = accountPermissions.some((p: any) => p == "roleAdd");
+    this.editRolePermission = accountPermissions.some((p: any) => p == "roleChange");
+    this.deleteRolePermission = accountPermissions.some((p: any) => p == "roleDelete");
     this.refresh();
   }
 
@@ -39,34 +47,35 @@ export class RolesComponent implements OnInit {
   checkCondition(e: any) {
     const clickedProperties = document.getElementById(e.source.id)?.firstChild?.lastChild?.lastChild?.nodeValue;
     const clickedRole = document.getElementById(e.source.id)?.parentElement?.parentElement?.parentElement?.querySelectorAll("h6")[0].innerHTML;
-    const roleArray = this.roles.filter((d:any)=>  d.role == clickedRole?.trim())
-    if(e.checked){
-     roleArray[0].permissions.push(clickedProperties?.trim());
-    }else{
+    const roleArray = this.roles.filter((d: any) => d.role == clickedRole?.trim())
+    if (e.checked) {
+      roleArray[0].permissions.push(clickedProperties?.trim());
+    } else {
       const index = roleArray[0].permissions.indexOf(clickedProperties?.trim())
-      roleArray[0].permissions.splice(index,1)
+      roleArray[0].permissions.splice(index, 1)
     }
-    this.roles.forEach((element:any) => {
-      if(element.role == clickedRole?.trim()){
-      return  element = roleArray;
+    this.roles.forEach((element: any) => {
+      if (element.role == clickedRole?.trim()) {
+        return element = roleArray;
       }
     });
-    
+
   }
 
   refresh() {
-    this.roleService.getRoles().subscribe(data => {
-      this.roles = data;
+    this.roleService.getRoles().subscribe((data:any) => {
+      this.roles = data.filter((d:any)=> d.role !== "admin" && d.role !== "user");
     })
   }
 
-  deleteRole(id:number) {
-    this.roleService.deleteRole(id).subscribe(()=>{
+  deleteRole(id: number) {
+    this.roleService.deleteRole(id).subscribe(() => {
       this.refresh();
     });
   }
-  saveRole(id:number) {
-    this.roleService.putRoles(this.roles[id],this.roles[id].id).subscribe(()=>{
+  saveRole(id: number) {
+    const selectedPermisions = this.roles.filter((d:any)=> d.id == id);
+    this.roleService.putRoles(selectedPermisions[0], id).subscribe(() => {
     })
   }
 
@@ -83,7 +92,7 @@ export class RolesComponent implements OnInit {
         const newRole: Role = {
           id: 0,
           role: data,
-          permissions:[]
+          permissions: []
         };
         this.roles = [newRole, ...this.roles]
         this.roleService.postRole(newRole).subscribe(() => { this.refresh(); })
