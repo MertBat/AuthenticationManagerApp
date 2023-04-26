@@ -13,15 +13,11 @@ export class UserTable {
 export class Role {
   id!: number;
   role!:string;
-  addProduct!:boolean;
-  changeProduct!:boolean
-  removeProduct!:boolean;
-  userAdd!:boolean;
-  userChange!:boolean;
-  userDelete!:boolean;
-  roleAdd!: boolean;
-	roleChange!: boolean;
-	roleDelete!: boolean;
+  permissions!:[]
+}
+export class Permission{
+  id!: number;
+  name!:string
 }
 
 export const ColumnsSchema = [

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "deneme": {
+    "AuthenticationManagerApp": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/deneme",
+            "outputPath": "dist/AuthenticationManagerApp",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -78,10 +78,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "deneme:build:production"
+              "browserTarget": "AuthenticationManagerApp:build:production"
             },
             "development": {
-              "browserTarget": "deneme:build:development"
+              "browserTarget": "AuthenticationManagerApp:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -89,7 +89,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "deneme:build"
+            "browserTarget": "AuthenticationManagerApp:build"
           }
         },
         "test": {

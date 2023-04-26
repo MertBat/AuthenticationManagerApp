@@ -20,6 +20,7 @@ import { PhoneComponent } from './products/phone/phone.component';
 import { MouseComponent } from './products/mouse/mouse.component';
 import { ProductSettingsComponent } from './products/product-settings/product-settings.component';
 import { AddChangeDialogComponent } from './products/product-settings/add-change-dialog/add-change-dialog.component';
+import { PermissionService } from '../services/permission.service';
 
 
 
@@ -58,6 +59,6 @@ import { AddChangeDialogComponent } from './products/product-settings/add-change
     MaterialModule
 
   ],
-providers: [RoleService]
+providers: [RoleService,PermissionService]
 })
 export class MainModule { }

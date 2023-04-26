@@ -42,7 +42,6 @@ export class UsersComponent implements OnInit {
   confirmPassword!: boolean;
   validation: any = {}
   selectedAccountName!: string
-  taskBlocker!:Role 
 
   constructor(
     private accountService: AccountService,
@@ -61,8 +60,6 @@ export class UsersComponent implements OnInit {
         });
       }
     });
-    this.taskBlocker = this.accountService.getAccountPermissions()[0]
-    console.log(this.taskBlocker);
   }
   refresh() {
     this.accountService.getAccounts().subscribe((data) => {

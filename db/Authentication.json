@@ -338,60 +338,100 @@
       "authority": "moderator",
       "password": "hasan1",
       "id": 48
+    },
+    {
+      "name": "alp",
+      "eMail": "alp@hotmail.com",
+      "userName": "alp",
+      "userSurname": "özçınar",
+      "authority": "user",
+      "password": "alp1",
+      "id": 49
     }
   ],
   "roles": [
     {
       "id": 0,
       "role": "admin",
-      "addProduct": true,
-      "changeProduct": true,
-      "removeProduct": true,
-      "userAdd": true,
-      "userChange": true,
-      "userDelete": true,
-      "roleAdd": true,
-      "roleChange": true,
-      "roleDelete": true
+      "permissions": [
+        "addProduct",
+        "changeProduct",
+        "removeProduct",
+        "userAdd",
+        "userChange",
+        "userDelete",
+        "roleAdd",
+        "roleChange",
+        "roleDelete"
+      ]
     },
     {
       "id": 1,
       "role": "moderator",
-      "addProduct": true,
-      "changeProduct": true,
-      "removeProduct": true,
-      "userAdd": true,
-      "userChange": true,
-      "userDelete": false,
-      "roleAdd": true,
-      "roleChange": true,
-      "roleDelete": true
+      "permissions": [
+        "addProduct",
+        "userAdd",
+        "userChange",
+        "userDelete",
+        "roleAdd",
+        "roleChange",
+        "roleDelete"
+      ]
     },
     {
       "id": 2,
       "role": "user",
-      "addProduct": false,
-      "changeProduct": false,
-      "removeProduct": false,
-      "userAdd": false,
-      "userChange": false,
-      "userDelete": false,
-      "roleAdd": true,
-      "roleChange": true,
-      "roleDelete": true
+      "permissions": []
     },
     {
       "id": 3,
       "role": "intern",
-      "addProduct": true,
-      "changeProduct": true,
-      "removeProduct": true,
-      "userAdd": false,
-      "userChange": false,
-      "userDelete": true,
-      "roleAdd": false,
-      "roleChange": false,
-      "roleDelete": false
+      "permissions": [
+        "addProduct",
+        "changeProduct",
+        "removeProduct",
+        "userAdd",
+        "userChange",
+        "userDelete"
+      ]
+    }
+  ],
+  "permissions": [
+    {
+      "id": 0,
+      "name": "addProduct"
+    },
+    {
+      "id": 1,
+      "name": "changeProduct"
+    },
+    {
+      "id": 2,
+      "name": "removeProduct"
+    },
+    {
+      "id": 3,
+      "name": "userAdd"
+    },
+    {
+      "id": 4,
+      "name": "userChange"
+    },
+    {
+      "id": 5,
+      "name": "userDelete"
+    },
+    {
+      "id": 6,
+      "name": "roleAdd"
+    },
+    {
+      "id": 7,
+      "name": "roleChange"
+    },
+    {
+      "id": 8,
+      "name": "roleDelete"
     }
   ],
   "productList": [

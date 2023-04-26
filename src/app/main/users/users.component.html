@@ -13,10 +13,10 @@
           {{ element[col.key] }}
         </span>
         <div class="btn-edit" *ngSwitchCase="'isEdit'">
-          <button mat-button (click)="editRow(element)" [disabled]="!taskBlocker.userChange">
+          <button mat-button (click)="editRow(element)" >
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-button class="button-remove" (click)="deleteRow(element)" [disabled]="!taskBlocker.userDelete">
+          <button mat-button class="button-remove" (click)="deleteRow(element)" >
             <mat-icon>delete</mat-icon>
           </button>
         </div>
@@ -46,7 +46,7 @@
   </tr>
 </table>
 <div class="add-icon">
-  <button mat-fab aria-label="add new profile" (click)="addRow()" [disabled]="!taskBlocker.userAdd">
+  <button mat-fab aria-label="add new profile" (click)="addRow()" >
     <mat-icon>add</mat-icon>
   </button>
 </div>
