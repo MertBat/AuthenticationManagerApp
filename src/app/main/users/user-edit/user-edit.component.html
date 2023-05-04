@@ -1,17 +1,17 @@
 <nb-card class="card">
   <nb-card-body>
     <nb-tabset>
-      <nb-tab tabTitle="Users Information">
+      <nb-tab tabTitle="User Information">
         <form *ngIf="tableReady" [formGroup]="uInformationForm" (ngSubmit)="changeInformation()"
           class="form-inline row">
           <mat-form-field class="form-group mx-sm-3 col-sm-4">
-            <mat-label for="userName" class="sr-only m-1">Name</mat-label>
-            <input matInput type="text" id="userName" placeholder="Name" name="userName" formControlName="userName" />
+            <mat-label for="name" class="sr-only m-1">Name</mat-label>
+            <input matInput type="text" id="name" placeholder="Name" name="userName" formControlName="name" />
           </mat-form-field>
           <mat-form-field class="form-group mx-sm-3 col-sm-4">
-            <mat-label for="userSurname" class="sr-only m-1">Surname</mat-label>
-            <input matInput type="text" id="userSurname" placeholder="Surname" name="userSurname"
-              formControlName="userSurname" />
+            <mat-label for="surname" class="sr-only m-1">Surname</mat-label>
+            <input matInput type="text" id="surname" placeholder="Surname" name="surname"
+              formControlName="surname" />
           </mat-form-field>
           <br />
           <mat-form-field class="form-group mx-sm-3 col-sm-4">
@@ -27,6 +27,9 @@
             <mat-label for="password" class="sr-only m-1">Password</mat-label>
             <input matInput type="password" id="password" placeholder="Password" name="password"
               formControlName="password" />
+              <mat-error *ngIf="uInformationForm.value.password == ''">
+                Password is <strong>required</strong>
+              </mat-error>
           </mat-form-field>
           <div class="w-100"></div>
           <br />
@@ -39,26 +42,23 @@
       <nb-tab tabTitle="Change Role" *ngIf="accountAuthority()">
         <mat-form-field style="width: 15%; min-width: 100px;">
           <mat-label>Role</mat-label>
-          <mat-select [(value)]="selectedRole" (valueChange)="newRoleSelected()">
+          <mat-select [(value)]="selectedRole" (valueChange)="selectboxValueChange()">
             <mat-option *ngFor="let role of roles" [value]="role">
               {{role}}
             </mat-option>
           </mat-select>
         </mat-form-field>
+        
         <button class="btn btn-primary m-4 position-relative" id="changeRoleButton" (click)="ChangeRole()" [disabled]="roleButtonCondition" >
           Save role
         </button>
+        
         <mat-divider></mat-divider>
-        <h6 mat-line> This account have permision to;</h6>
+        <h6 mat-line> This role have permision to;</h6>
         <mat-list>
           <ul>
-            <li *ngIf="addProduct"><span matListItemTitle>Add product permision</span></li>
-            <li *ngIf="changeProduct"><span matListItemTitle>Change product permision</span></li>
-            <li *ngIf="removeProduct"><span matListItemTitle>Remove product permision</span></li>
-            <li *ngIf="userAdd"><span matListItemTitle>User creating permision</span></li>
-            <li *ngIf="userChange"><span matListItemTitle>User information change permision</span></li>
-            <li *ngIf="userDelete"><span matListItemTitle>User delete permision</span></li>
-          </ul>
+            <li *ngFor="let permission of permissions"><span matListItemTitle> {{permission}} </span></li>
+          </ul> 
         </mat-list>
       </nb-tab>
     </nb-tabset>

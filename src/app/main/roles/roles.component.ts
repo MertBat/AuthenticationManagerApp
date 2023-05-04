@@ -91,7 +91,7 @@ export class RolesComponent implements OnInit {
       if (data) {
         const newRole: Role = {
           id: 0,
-          role: data,
+          roleName: data,
           permissions: []
         };
         this.roles = [newRole, ...this.roles]

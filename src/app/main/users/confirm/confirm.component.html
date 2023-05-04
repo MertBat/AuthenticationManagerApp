@@ -9,7 +9,6 @@
       <mat-error *ngIf="confirmForm.controls['password'].valid && confirmForm.controls['password'].touched">Password not correct</mat-error>
     </mat-form-field>
     <div mat-dialog-actions>
-      <button mat-button (click)="onNoClick()">No Thanks</button>
       <button mat-button type="submit" [disabled]="!confirmForm.valid">
         confirm
       </button>

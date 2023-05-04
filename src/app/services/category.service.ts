@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/internal/Observable';
   providedIn: 'root'
 })
 export class CategoryService {
-  path =  "http://localhost:3000/category"
+  path =  "https://authenticationapi20230501133914.azurewebsites.net/api/category"
   constructor(private http:HttpClient) { }
 
   getCategory():Observable<any>{

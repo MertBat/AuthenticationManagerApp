@@ -7,18 +7,18 @@ import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 
 @Injectable()
 export class ProductListService {
-  path = "http://localhost:3000/productList";
+  path = "https://getpostwebapi20230429171222.azurewebsites.net/api/product";
 
   constructor(private http: HttpClient) { }
 
   getProductList(product?: string): Observable<ProductList> {
-    let newPath
-    if (product) {
-      newPath = this.path + "?name=" + product;
-    } else {
-      newPath = this.path
-    }
-    return this.http.get<ProductList>(newPath);
+    // let newPath
+    // if (product) {
+    //   newPath = this.path + "?name=" + product;
+    // } else {
+    //   newPath = this.path
+    // }
+    return this.http.get<ProductList>(this.path);
   }
 
   postProductList(data: ProductList): Observable<ProductList> {

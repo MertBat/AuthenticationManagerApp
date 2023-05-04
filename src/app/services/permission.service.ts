@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PermissionService {
-  path ="http://localhost:3000/permissions";
+  path ="https://authenticationapi20230501133914.azurewebsites.net/api/Permission";
 
   constructor(private http:HttpClient) { }
 
