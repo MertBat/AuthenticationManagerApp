@@ -1,122 +1,104 @@
-
 import { ActivatedRoute } from '@angular/router';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Account } from 'src/app/login/account';
 import { AccountService } from 'src/app/services/account.service';
 import { ExaminationService } from 'src/app/services/examination.service';
-import { Role, UserTable } from '../userTable';
+import { Role, User } from '../userTable';
 import { RoleService } from 'src/app/services/role.service';
+import { PermissionService } from 'src/app/services/permission.service';
 
 @Component({
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
-  styleUrls: ['./user-edit.component.scss']
+  styleUrls: ['./user-edit.component.scss'],
 })
 export class UserEditComponent implements OnInit {
-  accountName!: string;
+  accountId!: number;
   tableReady = false;
-  uInformationForm!: FormGroup
-  Information: any;
+  uInformationForm!: FormGroup;
   PasswordChangeForm!: FormGroup;
-  passwords: any;
-  userInfo: any
+  userInfo: any;
   selectedItem!: string;
-  account = new UserTable();
-  administratorCheck!: boolean;
-  roles: any[] = []
+  account = new User();
+  roles: any;
+  permissions: any;
   roleProperties!: any;
-  selectedProperties!: any
-  selectedRole!: string
-  addProduct!: boolean;
-  changeProduct!: boolean;
-  removeProduct!: boolean;
-  userAdd!: boolean;
-  userChange!: boolean;
-  userDelete!: boolean;
-  roleButtonCondition = true
+  selectedProperties!: any;
+  selectedRole!: string;
+  roleButtonCondition = true;
 
   constructor(
     private formBuilder: FormBuilder,
     private examinationService: ExaminationService,
     private accountService: AccountService,
     private route: ActivatedRoute,
-    private roleService: RoleService
-  ) { }
+    private roleService: RoleService,
+  ) {}
 
   ngOnInit() {
-
-    this.route.queryParams.subscribe(params => {
-      this.accountName = params['username'];
+    this.route.queryParams.subscribe((params) => {
+      this.accountId = params['id'];
     });
-    this.accountService.getAccounts(this.accountName).subscribe((data) => {
-      this.account.accountName = data[0].name;
-      this.account.eMail = data[0].eMail;
-      this.account.userName = data[0].userName;
-      this.account.userSurname = data[0].userSurname;
-      this.account.profileFoto = data[0].url;
-      this.account.password = data[0].password;
-      this.selectedRole = data[0].authority;
-      this.uInformationformExamination()
-      this.tableReady = true
+    this.accountService.getAccounts(this.accountId).subscribe((data) => {
+      this.account = data;
+      this.tableReady = true;
+      this.selectedRole= this.account.authority;
+      this.uInformationformExamination();
     });
-    this.roleService.getRoles().subscribe(data => {
-      if (Array.isArray(data)) {
-        this.roles = data.map((r: Role) => {
-          return r.role;
-        });
-        this.roleProperties = data.filter((d: Role) => {
-          return Object.values(d).includes(true);
-        });
-        console.log(this.roleProperties);
-      }
-      this.permisions()
+    this.roleService.getRoles().subscribe((data: any) => {
+      this.permissions = data.filter((d: Role) => {
+        return d.roleName == this.account.authority;
+      })[0].permissions;
+      this.roles = data.map((d:Role)=>{
+        return d.roleName;
+      })
     });
-
   }
 
-  newRoleSelected() {
-    this.roleButtonCondition= false
-  }
 
-  permisions() {
+  permission() {
     this.selectedProperties = this.roleProperties.filter((d: any) => {
-      return Object.values(d).includes(this.selectedRole)
+      return Object.values(d).includes(this.selectedRole);
     });
-    this.addProduct = this.selectedProperties[0].addProduct;
-    this.changeProduct = this.selectedProperties[0].changeProduct;
-    this.removeProduct = this.selectedProperties[0].removeProduct;
-    this.userAdd = this.selectedProperties[0].userAdd;
-    this.userChange = this.selectedProperties[0].userChange;
-    this.userDelete = this.selectedProperties[0].userDelete;
+  }
+
+  selectboxValueChange(){
+    this.roleService.getRoles().subscribe((data: any) => {
+      this.permissions = data.filter((d: Role) => {
+        return d.roleName == this.selectedRole;
+      })[0].permissions;
+      
+    });
+    this.permissions = [...this.permissions]
+    this.roleButtonCondition = false;
+    
   }
 
   uInformationformExamination() {
     this.uInformationForm = this.formBuilder.group({
-      userName: [this.account.userName],
-      userSurname: [this.account.userSurname],
+      name: [this.account.name],
+      surname: [this.account.surname],
       eMail: [this.account.eMail, Validators.email],
-      profileFoto: [this.account.profileFoto],
+      profileFoto: [this.account.url],
       password: [this.account.password, Validators.required],
     });
-
-  }
+  } 
 
   changeInformation() {
     if (this.uInformationForm.valid) {
       this.userInfo = Object.assign({}, this.uInformationForm.value);
-      this.examinationService.userInfoChange(this.userInfo, this.account.accountName);
+      this.examinationService.userInfoChange(this.userInfo,this.accountId);
     }
   }
 
   ChangeRole() {
-    this.examinationService.authorityChange(this.selectedRole, this.account.accountName);
+    this.examinationService.authorityChange(this.selectedRole, this.accountId);
   }
 
-  accountAuthority(){
-    if(this.accountService.avalibleAccount().authority == "admin"){
+  accountAuthority() {
+    if (this.accountService.avalibleAccount().authority == 'admin') {
       return true;
-    }else{
+    } else {
       return false;
     }
   }

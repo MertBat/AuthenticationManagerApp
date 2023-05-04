@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AccountService } from 'src/app/services/account.service';
-import { ColumnsSchema, Role, UserTable } from './userTable';
+import { ColumnsSchema, Role, User } from './userTable';
 import {
   animate,
   state,
@@ -35,16 +35,16 @@ import { Router } from '@angular/router';
 export class UsersComponent implements OnInit {
   displayedColumns: string[] = ColumnsSchema.map((col) => col.key);
   columnsSchema: any = ColumnsSchema;
-  datas: UserTable[] = [];
+  datas: User[] = [];
   dataSource: any;
   @ViewChild(MatTable) table!: MatTable<RoleService>;
   roles: any[] = [];
   confirmPassword!: boolean;
-  validation: any = {}
-  selectedAccountName!: string
-  addUserPermission!: boolean
-  deleteUserPermission!: boolean
-  editUserPermission!: boolean
+  validation: any = {};
+  selectedAccountName!: string;
+  addUserPermission!: boolean;
+  deleteUserPermission!: boolean;
+  editUserPermission!: boolean;
 
   constructor(
     private accountService: AccountService,
@@ -52,36 +52,33 @@ export class UsersComponent implements OnInit {
     private roleService: RoleService,
     private examinationService: ExaminationService,
     private alertifyService: AletifyService,
-    private router:Router
-  ) { }
+    private router: Router
+  ) {}
   ngOnInit() {
     this.refresh();
     this.roleService.getRoles().subscribe((data) => {
       if (Array.isArray(data)) {
         this.roles = data.map((d: Role) => {
-          return d.role;
+          return d.roleName;
         });
       }
     });
-    const accountPermissions = this.accountService.getAccountPermissions()[0].permissions;
-    this.addUserPermission = accountPermissions.some((p: any) => p == "userAdd");
-    this.deleteUserPermission = accountPermissions.some((p: any) => p == "userDelete");
-    this.editUserPermission = accountPermissions.some((p: any) => p == "userChange");
-
+    const accountPermissions =
+      this.accountService.getAccountPermissions()[0].permissions;
+    this.addUserPermission = accountPermissions.some(
+      (p: any) => p == 'userAdd'
+    );
+    this.deleteUserPermission = accountPermissions.some(
+      (p: any) => p == 'userDelete'
+    );
+    this.editUserPermission = accountPermissions.some(
+      (p: any) => p == 'userChange'
+    );
   }
   refresh() {
     this.accountService.getAccounts().subscribe((data) => {
-      this.datas = data.map((d: any) => {
-        let userTable = new UserTable();
-        userTable.accountName = d.name;
-        userTable.userName = d.userName;
-        userTable.userSurname = d.userSurname;
-        userTable.password = d.password;
-        userTable.role = d.authority;
-        userTable.eMail = d.eMail;
-        return userTable;
-      });
-      this.dataSource = new MatTableDataSource(this.datas);
+      this.dataSource = new MatTableDataSource(data);
+      this.datas = data;
     });
   }
 
@@ -97,66 +94,66 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  editRow(row: UserTable) {
-    this.router.navigate(['/main/controlPanel/users/edit'], { queryParams: { username: row.accountName } });
+  editRow(row: User) {
+    this.router.navigate(['/main/controlPanel/users/edit'], {
+      queryParams: { id: row.id, username: row.userName },
+    });
   }
 
-  editedRow(row: UserTable) {
-    this.accountService.getAccounts().subscribe(data => {
-      if (row.id == 0 && !data.some((user: any) => user.name.includes(row.accountName))) {
-        this.examinationService.addUser(row).subscribe(() => {
+  newRow(row: User) {
+    this.accountService.getAccounts().subscribe((data) => {
+      if (
+        row.id == 0 &&
+        !data.some((user: any) => user.name.includes(row.userName)) &&
+        row.password !== ''
+      ) {
+        row.isEdit = false;
+        delete row.isEdit;
+        row.url = '';
+        this.accountService.postAccount(row).subscribe(() => {
           row.isEdit = false;
-        })
+        });
+      } else if (row.password == '') {
+        this.alertifyService.alert('Failure', 'please type password');
       } else {
-        this.alertifyService.alert("Failure", `Account name "${row.accountName}" is already used in`)
+        this.alertifyService.alert(
+          'Failure',
+          `Account name "${row.userName}" is already used in`
+        );
       }
     });
   }
 
   addRow() {
-    const newUser: UserTable = {
+    const newUser: User = {
       id: 0,
-      accountName: "",
-      userName: "",
-      userSurname: "",
-      password: "",
-      eMail: "",
-      role: "user",
-      isEdit: true
+      userName: '',
+      name: '',
+      surname: '',
+      password: '',
+      eMail: '',
+      authority: 'user',
+      isEdit: true,
     };
     this.datas = [newUser, ...this.datas];
     this.dataSource = new MatTableDataSource(this.datas);
   }
 
-  deleteRow(row: UserTable) {
-    this.confirmation("delete").subscribe(result => {
+  deleteRow(row: User) {
+    this.confirmation('delete').subscribe((result) => {
       if (result) {
-        debugger;
-        this.examinationService.deleteUser(row).subscribe(() => {
-          this.datas = this.datas.filter((m: any) => m.accountName !== row.accountName)
+        this.accountService.deleteAccount(row.id!).subscribe(() => {
+          this.datas = this.datas.filter((m: any) => m.id !== row.id);
           this.refresh();
+          this.alertifyService.success('User successfuly deleted');
         });
       }
     });
   }
 
-  inputControl(e: any, key: string, id: number) {
-    if (!this.validation[id]) {
-      this.validation[id] = {};
-    }
-    this.validation[id][key] = e.target.validity.valid
-  }
-
-  validationControl(id: number) {
-    if (this.validation[id]) {
-      return Object.values(this.validation[id]).some(item => item == false)
-    }
-    return false
-  }
-
   confirmation(name: string): Observable<boolean> {
     const dialogRef = this.matDialog.open(ConfirmComponent, {
-      data: name
+      data: name,
     });
     return dialogRef.afterClosed();
   }
