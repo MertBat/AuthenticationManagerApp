@@ -16,23 +16,24 @@ export class RoleService {
   }
 
   postRole(data: Role): Observable<Role> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: 'Token',
-      }),
-    };
-    return this.http.post<Role>(this.path, data, httpOptions);
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type': 'application/json',
+    //     Authorization: 'Token',
+    //   }),
+    // };
+    return this.http.post<Role>(this.path, data);
   }
   putRoles(data:Role, id:number):Observable<any>{
     const newPath = this.path + "/" + id;
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: 'Token',
-      }),
-    };
-    return this.http.put(newPath,data,httpOptions);
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type': 'application/json',
+    //     Authorization: 'Token',
+    //   }),
+    // };
+    console.log()
+    return this.http.put(newPath,data);
   }
 
   deleteRole(id:number):Observable<any>{

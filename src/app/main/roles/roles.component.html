@@ -1,9 +1,9 @@
 <div class="container row">
     <div class="col-sm-3" style="min-width: 200px;" *ngFor="let role of roles">
-        <h6> {{role.role}} </h6>
+        <h6> {{role.roleName}} </h6>
         <ul>
             <li *ngFor="let permission of permissions"><mat-checkbox
-                    [checked]="includesEqual(role.permissions, permission.name)" (change)="checkCondition($event)">
+                    [checked]="includesPermission(role.permissions, permission.name)" (change)="checkCondition($event)">
                     {{permission.name}} </mat-checkbox></li>
             <div class="buttons">
                 <button mat-mini-fab aria-label="add new profile" class="addIcon"

@@ -26,7 +26,8 @@ export class RolesComponent implements OnInit {
     private roleService: RoleService,
     public matDialog: MatDialog,
     private accountService: AccountService,
-    private permissionService: PermissionService
+    private permissionService: PermissionService,
+    private alertifyService:AletifyService
   ) { }
 
   ngOnInit() {
@@ -40,18 +41,19 @@ export class RolesComponent implements OnInit {
     this.refresh();
   }
 
-  includesEqual(array: string[], value: string) {
+  includesPermission(array: string[], value: string) {
     return array.some((p: any) => p == value)
   }
 
   checkCondition(e: any) {
-    const clickedProperties = document.getElementById(e.source.id)?.firstChild?.lastChild?.lastChild?.nodeValue;
+    const clickedPermission = document.getElementById(e.source.id)?.firstChild?.lastChild?.lastChild?.nodeValue;
     const clickedRole = document.getElementById(e.source.id)?.parentElement?.parentElement?.parentElement?.querySelectorAll("h6")[0].innerHTML;
-    const roleArray = this.roles.filter((d: any) => d.role == clickedRole?.trim())
+    const roleArray = this.roles.filter((d: Role) =>  d.roleName == clickedRole?.trim())
+    debugger;
     if (e.checked) {
-      roleArray[0].permissions.push(clickedProperties?.trim());
+      roleArray[0].permissions.push(clickedPermission?.trim());
     } else {
-      const index = roleArray[0].permissions.indexOf(clickedProperties?.trim())
+      const index = roleArray[0].permissions.indexOf(clickedPermission?.trim())
       roleArray[0].permissions.splice(index, 1)
     }
     this.roles.forEach((element: any) => {
@@ -76,7 +78,10 @@ export class RolesComponent implements OnInit {
   saveRole(id: number) {
     const selectedPermisions = this.roles.filter((d:any)=> d.id == id);
     this.roleService.putRoles(selectedPermisions[0], id).subscribe(() => {
-    })
+      this.alertifyService.success("Successfuly saved")
+    },(e)=>{
+      this.alertifyService.error(e);
+    });
   }
 
   roleName(): Observable<string> {

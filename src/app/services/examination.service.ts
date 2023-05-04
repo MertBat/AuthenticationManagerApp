@@ -3,8 +3,7 @@ import { Router } from '@angular/router';
 import { Account } from '../login/account';
 import { AccountService } from './account.service';
 import { AletifyService } from './aletify.service';
-import { Observable, map, switchMap, tap } from 'rxjs';
-import { Role, User } from '../main/users/userTable';
+import { Observable} from 'rxjs';
 import { RoleService } from './role.service';
 
 @Injectable()

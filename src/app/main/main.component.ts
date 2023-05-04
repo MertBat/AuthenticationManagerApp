@@ -14,7 +14,9 @@ import { AccountService } from '../services/account.service';
   styleUrls: ['./main.component.css'],
 })
 export class MainComponent {
-  FullName!: string;
+  name!: string;
+  surname!: string;
+  fullName!: string;
   url!: string;
   items = [{ title: 'Profile' }, { title: 'Logout' }];
 
@@ -25,9 +27,11 @@ export class MainComponent {
     private router: Router,
     private accountService: AccountService,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit() {
+    this.name = this.accountService.avalibleAccount().name;
+    this.surname = this.accountService.avalibleAccount().surname;
     this.nbMenuService
       .onItemClick()
       .pipe(
@@ -35,10 +39,12 @@ export class MainComponent {
         map(({ item: { title } }) => 'main/' + title.toLocaleLowerCase())
       )
       .subscribe((title) => this.router.navigateByUrl(title));
-    this.FullName =
-      this.accountService.avalibleAccount().name +
+    this.fullName =
+      this.name.charAt(0).toUpperCase() +
+      this.name.slice(1) +
       ' ' +
-      this.accountService.avalibleAccount().surname;
+      this.surname.charAt(0).toUpperCase() +
+      this.surname.slice(1);
     this.url = this.accountService.avalibleAccount().url;
   }
   toggle() {
@@ -56,24 +62,24 @@ export class MainComponent {
       children: [
         {
           title: 'Book',
-          link: "book"
+          link: 'book',
         },
         {
           title: 'Shoe',
-          link: "shoe"
+          link: 'shoe',
         },
         {
           title: 'Mouse',
-          link: "mouse"
+          link: 'mouse',
         },
         {
           title: 'Phone',
-          link: "phone"
+          link: 'phone',
         },
         {
           title: 'Product Settings',
-          link: "product-settings",
-          hidden: !this.accountService.getPermissionToControlPanel()
+          link: 'product-settings',
+          hidden: !this.accountService.getPermissionToControlPanel(),
         },
       ],
     },
