@@ -8,17 +8,11 @@ import { Role } from '../main/users/userTable';
   providedIn: 'root',
 })
 export class RoleService {
-  path = 'http://localhost:3000/roles';
+  path = 'https://authenticationapi20230501133914.azurewebsites.net/api/Role';
   constructor(private http: HttpClient) {}
 
-  getRoles(input?: string): Observable<Role> {
-    let newPath;
-    if (input) {
-      newPath = this.path + '?role=' + input;
-    } else {
-      newPath = this.path;
-    }
-    return this.http.get<Role>(newPath);
+  getRoles(): Observable<Role> {
+    return this.http.get<Role>(this.path);
   }
 
   postRole(data: Role): Observable<Role> {

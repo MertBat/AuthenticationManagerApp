@@ -1,18 +1,18 @@
-export class UserTable {
+export class User {
   id?: number;
-  accountName!: string;
   userName!: string;
-  userSurname!: string;
+  name!: string;
+  surname!: string;
   eMail!: string;
-  role!: string;
+  authority!: string;
   password!: string;
   isEdit?: boolean;
-  profileFoto?: string
+  url?: string
 }
 
 export class Role {
   id!: number;
-  role!:string;
+  roleName!:string;
   permissions!:[]
 }
 export class Permission{
@@ -22,18 +22,18 @@ export class Permission{
 
 export const ColumnsSchema = [
   {
-    key: 'accountName',
+    key: 'userName',
+    type: 'text',
+    label: 'User Name',
+  },
+  {
+    key: 'name',
     type: 'paragraph',
-    label: 'Account',
+    label: 'Name',
     required: true
   },
   {
-    key: 'userName',
-    type: 'text',
-    label: 'Name',
-  },
-  {
-    key: 'userSurname',
+    key: 'surname',
     type: 'text',
     label: 'Surname',
   },
@@ -50,7 +50,7 @@ export const ColumnsSchema = [
     required: true
   },
   {
-    key: 'role',
+    key: 'authority',
     type: 'check',
     label: 'Role',
   },

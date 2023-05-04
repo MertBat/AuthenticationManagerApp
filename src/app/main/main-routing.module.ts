@@ -16,31 +16,36 @@ import { ProductSettingsComponent } from './products/product-settings/product-se
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: MainComponent,
     children: [
-      { path: 'home', component: HomeComponent },  
+      { path: 'home', component: HomeComponent },
       { path: 'book', component: BookComponent },
       { path: 'phone', component: PhoneComponent },
       { path: 'shoe', component: ShoeComponent },
       { path: 'mouse', component: MouseComponent },
       { path: 'profile', component: ProfileComponent },
-      { path: 'product-settings', component: ProductSettingsComponent, canActivate:[ControlpanelGuardService] },
       {
-        path: 'controlPanel', canActivate:[ControlpanelGuardService], children: [
+        path: 'product-settings',
+        component: ProductSettingsComponent,
+        canActivate: [ControlpanelGuardService],
+      },
+      {
+        path: 'controlPanel',
+        canActivate: [ControlpanelGuardService],
+        children: [
           { path: 'users', component: UsersComponent },
           { path: 'users/edit', component: UserEditComponent },
-          { path: 'roles', component: RolesComponent }
-        ]
-      }
-    ]
+          { path: 'roles', component: RolesComponent },
+        ],
+      },
+    ],
   },
-  { path: "logout", component: LoginComponent }
+  { path: 'logout', component: LoginComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class MainRoutingModule {
-}
+export class MainRoutingModule {}

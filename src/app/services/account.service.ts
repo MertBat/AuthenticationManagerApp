@@ -5,70 +5,77 @@ import { Account } from '../login/account';
 
 @Injectable()
 export class AccountService {
-  path = 'http://localhost:3000/account';
+  path = 'https://authenticationapi20230501133914.azurewebsites.net/api/';
   getAccount: any;
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
   permision!: boolean;
 
-  getAccounts(input?: string): Observable<any> {
-    let newpath;
-    if (input) {
-      newpath = this.path + '?name=' + input;
-    } else {
-      newpath = this.path;
-    }
-    return this.http.get<Account[]>(newpath);
+  signIn(data: Account): Observable<any> {
+    return this.http.post(this.path + 'Account/signin', {
+      userName: data.name,
+      password: data.password,
+    });
   }
 
-  postAccount(data: Account): Observable<Account> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: 'Token',
-      }),
-    };
-    return this.http.post<Account>(this.path, data, httpOptions);
+  signUp(data: any): Observable<any> {
+    return this.http.post(this.path + 'Account/signup', {
+      username: data.name,
+      password: data.password,
+      password1: data.password1,
+    });
+  }
+
+  getAccounts(id?: number): Observable<any> {
+    let newPath = this.path + 'User';
+    if (id) {
+      newPath = newPath + '/' + id;
+    }
+    return this.http.get<Account[]>(newPath);
+  }
+
+  postAccount(data: any): Observable<Account> {
+    return this.http.post<Account>(this.path + 'User', data);
   }
 
   putAccount(data: any, id: number): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: 'Token',
-      }),
-    };
-    const newPath = this.path + '/' + id;
-    return this.http.put(newPath, data, httpOptions);
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type': 'application/json',
+    //     Authorization: 'Token',
+    //   }),
+    // };
+    const newPath = this.path + 'User/' + id;
+    return this.http.put(newPath, data);
   }
 
   deleteAccount(id: number): Observable<any> {
-    const newpath = this.path + "/" + id;
+    const newpath = this.path + 'User/' + id;
     return this.http.delete(newpath);
   }
 
   getPermissionToControlPanel() {
-    const permision = JSON.parse(localStorage.getItem("account")!);
-    if (permision.authority !== "user") {
-      return true
+    const permision = JSON.parse(localStorage.getItem('account')!);
+    if (permision.authority !== 'user') {
+      return true;
     } else {
-      return false
+      return false;
     }
   }
 
   getLoginPermission() {
-    const permission = sessionStorage.getItem("account")
+    const permission = sessionStorage.getItem('account');
     if (permission) {
       return true;
     } else {
-      return false
+      return false;
     }
   }
 
-  getAccountPermissions(){
-    return JSON.parse(localStorage.getItem("permissions")!);
+  getAccountPermissions() {
+    return JSON.parse(localStorage.getItem('permissions')!);
   }
 
   avalibleAccount() {
-    return JSON.parse(localStorage.getItem("account")!);
+    return JSON.parse(localStorage.getItem('account')!);
   }
 }

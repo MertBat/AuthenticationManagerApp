@@ -1,10 +1,10 @@
 export class Account{
     id!:number;
     authority!:string;
-    name!:string;
+    userName!:string;
     password!:string;
-    userName?: string;
-    userSurname?: string;
+    name?: string;
+    surname?: string;
     eMail?: string;
     fotoUrl?:string
 }

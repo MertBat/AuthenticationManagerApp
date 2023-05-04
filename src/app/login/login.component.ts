@@ -4,6 +4,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ExaminationService } from '../services/examination.service';
 import { finalize, from } from 'rxjs';
+import { RoleService } from '../services/role.service';
+import { AletifyService } from '../services/aletify.service';
+import { Role } from '../main/users/userTable';
 
 @Component({
   selector: 'app-login',
@@ -22,12 +25,14 @@ export class LoginComponent implements OnInit {
   examinationForm!: FormGroup;
   loginData: any;
   loading: boolean = false;
-
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private examinationService: ExaminationService
-  ) {}
+    private examinationService: ExaminationService,
+    private roleService: RoleService,
+    private alert: AletifyService,
+
+  ) { }
 
   navigateSignUp() {
     this.router.navigateByUrl('/signUp');
@@ -55,7 +60,18 @@ export class LoginComponent implements OnInit {
         finalize(() => {
           this.loading = false;
         })
-      ).subscribe();
+      ).subscribe(res => {
+        this.router.navigateByUrl('/main/home');
+        sessionStorage.setItem("account", "true");
+        localStorage.setItem('account', JSON.stringify(res));
+        this.roleService.getRoles().subscribe((data:any) => {
+          const permissions = data.filter((d:Role)=> d.roleName == res.authority)
+          localStorage.setItem("permissions", JSON.stringify(permissions));
+        })
+      },e=>{
+        debugger;
+        this.alert.error(e.error);
+      });
     }
   }
 }

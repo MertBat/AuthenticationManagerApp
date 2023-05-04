@@ -36,9 +36,9 @@ export class MainComponent {
       )
       .subscribe((title) => this.router.navigateByUrl(title));
     this.FullName =
-      this.accountService.avalibleAccount().userName +
+      this.accountService.avalibleAccount().name +
       ' ' +
-      this.accountService.avalibleAccount().userSurname;
+      this.accountService.avalibleAccount().surname;
     this.url = this.accountService.avalibleAccount().url;
   }
   toggle() {
