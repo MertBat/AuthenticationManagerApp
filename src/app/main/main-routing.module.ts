@@ -13,6 +13,7 @@ import { PhoneComponent } from './products/phone/phone.component';
 import { ShoeComponent } from './products/shoe/shoe.component';
 import { MouseComponent } from './products/mouse/mouse.component';
 import { ProductSettingsComponent } from './products/product-settings/product-settings.component';
+import { ShoppingBagComponent } from './products/shopping-bag/shopping-bag.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
       { path: 'shoe', component: ShoeComponent },
       { path: 'mouse', component: MouseComponent },
       { path: 'profile', component: ProfileComponent },
+      {path: "shoppingBag", component: ShoppingBagComponent},
       {
         path: 'product-settings',
         component: ProductSettingsComponent,

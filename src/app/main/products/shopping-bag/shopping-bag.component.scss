@@ -1,0 +1,22 @@
+img{
+    width: 75px;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+.listItem{
+    background-color: white;
+    margin-bottom: 20px;
+    height: 75px;
+    border-radius: 10px;
+    width: 500px;
+    border: 1px solid gray;
+}
+
+h6{
+    margin-top: 20px
+}
+
+.listItem:focus{
+    background-color: rgb(137, 137, 139)
+}

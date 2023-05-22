@@ -7,12 +7,12 @@ import {
   UrlTree,
 } from '@angular/router';
 import { AccountService } from './account.service';
-import { AletifyService } from './aletify.service';
+import { AlertifyService } from './alertify.service';
 
 @Injectable()
 export class LoginGuardService implements CanActivate {
 
-  constructor(private alertifyService: AletifyService,private accountService: AccountService, private router: Router) {
+  constructor(private alertifyService: AlertifyService,private accountService: AccountService, private router: Router) {
   }
 
   canActivate(

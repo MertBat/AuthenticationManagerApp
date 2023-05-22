@@ -19,4 +19,10 @@ export class BookComponent implements OnInit {
       });
     });
   }
+
+  flipTheCard(productName:string, id:number){
+    const flipcardId =productName +id
+    const flipcard = document.getElementById(flipcardId);
+    flipcard?.classList.toggle('flipped')
+  }
 }

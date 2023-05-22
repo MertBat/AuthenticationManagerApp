@@ -1,11 +1,15 @@
 <nb-layout>
   <nb-layout-header>
+    <button mat-icon-button aria-label="menu icon" (click)="toggle()">
+      <mat-icon class="menu-icon">menu</mat-icon>
+    </button>
     <nb-user [name]=fullName [picture]=url [nbContextMenu]="items"
       nbContextMenuTag="my-context-menu">
     </nb-user>
   </nb-layout-header>
-  <nb-sidebar class="m-2 "><nb-card>
-      <nb-menu [items]="menuItems"> </nb-menu>
+  <nb-sidebar class="m-2">
+    <nb-card>
+      <nb-menu [items]="menuItems"></nb-menu>
     </nb-card>
   </nb-sidebar>
   <nb-layout-column class="colored-column-basic">

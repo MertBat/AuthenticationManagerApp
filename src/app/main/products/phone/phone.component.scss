@@ -1,44 +1,45 @@
-.nbCard{
-  min-height: 400px;
-  border-radius: 15px;
-}
-
-.nbCard:hover{
-  background-color: #fff;
-  box-shadow: 0px 4px 8px 0 #fc9ebd;
-}
-
-.nbCard:hover img{
-  padding: 15px;
-}
-
-.some{
-  overflow: hidden;
-  position: relative;
-  padding-top: 100%;
-}
-
-.child{
-  inset: 0px;
-  overflow: hidden;
-  position: absolute;
-
-}
-img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 15px;
-}
-.addToCard{
-  width:400px ;  
-  position: absolute; 
-  bottom: 25px; 
-  margin: auto;
+img{
+  width: 250px;
+  aspect-ratio: 2/2;
+  object-fit: contain;
   padding: 10px;
+}
+
+nb-flip-card{
+  width: 300px; 
+  height: 300px;
+  margin: 10px;
+  min-width: 273px;
+}
+
+nb-card{
+  width: 250px; 
+  height: 300px;
+}
+
+.addtoCard{
+  width: 120px;
+  margin: 0 auto;
+  display: block;
+}
+
+.prise{
+  position: fixed;
+  right: 20px;
+  margin: 0;
+  text-align: center;
+  padding-top: 8px;
+}
+
+.sideButton{
+  position: fixed;
+  right: 0px;
+  height: 298px;
+  border: none; 
+  background: rgb(255,255,255);
+  background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 25%, rgba(255,64,129,0.17969194513742992) 100%);
+}
+
+.sideButton:hover{
+  background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 25%, rgba(255,64,129,0.375770376509979) 100%); 
 }

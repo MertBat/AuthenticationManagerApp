@@ -1,12 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { RoleService } from 'src/app/services/role.service';
-import { ExaminationService } from 'src/app/services/examination.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { Permission, Role } from '../users/userTable';
+import {  Role } from '../users/userTable';
 import { AccountService } from 'src/app/services/account.service';
-import { AletifyService } from 'src/app/services/aletify.service';
 import { PermissionService } from 'src/app/services/permission.service';
+import { AlertifyService } from 'src/app/services/alertify.service';
+
+declare let alertify:any
 
 @Component({
   selector: 'app-properties',
@@ -27,7 +28,7 @@ export class RolesComponent implements OnInit {
     public matDialog: MatDialog,
     private accountService: AccountService,
     private permissionService: PermissionService,
-    private alertifyService:AletifyService
+    private alertifyService:AlertifyService
   ) { }
 
   ngOnInit() {
@@ -71,9 +72,14 @@ export class RolesComponent implements OnInit {
   }
 
   deleteRole(id: number) {
-    this.roleService.deleteRole(id).subscribe(() => {
-      this.refresh();
+    alertify.confirm("DELETE!!!",'Are you sure you want to delete this role?', () => {
+      this.roleService.deleteRole(id).subscribe(() => {
+        this.refresh();
+        this.alertifyService.success("Role successfuly deleted")
+      });
+    }, () => {
     });
+    
   }
   saveRole(id: number) {
     const selectedPermisions = this.roles.filter((d:any)=> d.id == id);

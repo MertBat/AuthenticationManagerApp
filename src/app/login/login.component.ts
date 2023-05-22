@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ExaminationService } from '../services/examination.service';
 import { finalize, from } from 'rxjs';
 import { RoleService } from '../services/role.service';
-import { AletifyService } from '../services/aletify.service';
+import { AlertifyService } from '../services/alertify.service';
 import { Role } from '../main/users/userTable';
 
 @Component({
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private examinationService: ExaminationService,
     private roleService: RoleService,
-    private alert: AletifyService,
+    private alertifyService: AlertifyService,
 
   ) { }
 
@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
         })
       },e=>{
         debugger;
-        this.alert.error(e.error);
+        this.alertifyService.error(e.error);
       });
     }
   }

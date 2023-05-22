@@ -14,7 +14,7 @@ export class AddChangeDialogComponent implements OnInit {
   selectedChategory!: string;
   productForm!: FormGroup;
   productData: any;
-  flipped!: boolean
+  flipped= false
   
  
   constructor(
@@ -35,13 +35,15 @@ export class AddChangeDialogComponent implements OnInit {
     this.productForm = this.formBuilder.group({
       name: [this.data.name, Validators.required],
       url: [this.data.url, Validators.required],
-      price: [this.data.price, Validators.compose([Validators.required, Validators.min(0.1)]) ],
+      price: [this.data.price, Validators.compose([Validators.required, Validators.min(0.1), Validators.max(99999)]) ],
       category: [this.data.category, Validators.compose([Validators.required, Validators.maxLength(650)])],
       description: [this.data.description, Validators.required],
     });
   }
 
-  
+  flipTheCard(){
+    this.flipped = !this.flipped
+  }
  
 
   saveProduct() {

@@ -11,11 +11,10 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmComponent } from './confirm/confirm.component';
 import { RoleService } from 'src/app/services/role.service';
-import { ExaminationService } from 'src/app/services/examination.service';
-import { AletifyService } from 'src/app/services/aletify.service';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { AlertifyService } from 'src/app/services/alertify.service';
 
 @Component({
   selector: 'app-users',
@@ -50,8 +49,7 @@ export class UsersComponent implements OnInit {
     private accountService: AccountService,
     public matDialog: MatDialog,
     private roleService: RoleService,
-    private examinationService: ExaminationService,
-    private alertifyService: AletifyService,
+    private alertifyService: AlertifyService,
     private router: Router
   ) {}
   ngOnInit() {

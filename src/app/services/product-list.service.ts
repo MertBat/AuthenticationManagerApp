@@ -1,24 +1,23 @@
 import { Injectable } from '@angular/core';
 import { ProductList } from '../main/products/productList';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 
 
 @Injectable()
 export class ProductListService {
-  path = "https://getpostwebapi20230429171222.azurewebsites.net/api/product";
+  path = "https://authenticationapi20230501133914.azurewebsites.net/api/product";
 
   constructor(private http: HttpClient) { }
 
-  getProductList(product?: string): Observable<ProductList> {
-    // let newPath
-    // if (product) {
-    //   newPath = this.path + "?name=" + product;
-    // } else {
-    //   newPath = this.path
-    // }
-    return this.http.get<ProductList>(this.path);
+  getProductList(id?: number): Observable<ProductList> {
+    let newPath
+    if (id) {
+      newPath = this.path + "/" + id;
+    } else {
+      newPath = this.path
+    }
+    return this.http.get<ProductList>(newPath);
   }
 
   postProductList(data: ProductList): Observable<ProductList> {

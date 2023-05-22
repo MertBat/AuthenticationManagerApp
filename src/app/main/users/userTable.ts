@@ -40,7 +40,7 @@ export const ColumnsSchema = [
   {
     key: 'eMail',
     type: 'text',
-    label: 'E-mail',
+    label: 'E-Mail',
     pattern: ".+@.+"
   },
   {

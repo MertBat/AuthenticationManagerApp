@@ -48,8 +48,7 @@ export class MainComponent {
     this.url = this.accountService.avalibleAccount().url;
   }
   toggle() {
-    this.sidebarService.toggle(true);
-    return false;
+    this.sidebarService.toggle();
   }
 
   menuItems: NbMenuItem[] = [
@@ -58,7 +57,7 @@ export class MainComponent {
       link: 'home',
     },
     {
-      title: 'product',
+      title: 'Product',
       children: [
         {
           title: 'Book',
@@ -85,6 +84,7 @@ export class MainComponent {
     },
     {
       title: 'Shopping Bag',
+      link: "shoppingBag"
     },
     {
       title: 'Control Panel',
@@ -120,3 +120,4 @@ export class MainComponent {
     },
   ];
 }
+

@@ -1,36 +1,45 @@
 <div class="row">
   <nb-flip-card
-    class="col-sm-4 m-3"
+    class="col-sm-4"
     *ngFor="let product of productListShoe"
-    style="width: 400px; height: 400px;"
+    [showToggleButton]="false"
+    [id]="product.name + product.id"
   >
     <nb-card-front>
-      <nb-card class="nbCard">
-        <div class="some">
-          <h1 style="position: absolute">asasa</h1>
-          <div class="child" style="max-width: 400">
-            <img
-              [src]="product.url"
-              [alt]="product.name"
-            />
-          </div>
-        </div>
-        <div class="row addToCard">
-          <div class="col-sm-4">
-          <p style="font-weight: bold; color: #ff4081; text-align: center; font-size: large;" > {{product.price}} ₺</p>
-        </div>
-        <button mat-flat-button color="accent"  class="col-sm-4" >
-          Add to card
+      <nb-card>
+        <button
+          class="sideButton"
+          (click)="flipTheCard(product.name, product.id)"
+        >
+          <mat-icon>fast_forward</mat-icon>
         </button>
-      </div>
+        <div>
+          <img
+            [src]="product.url"
+            [alt]="product.name"
+            style="block-size: fit-content"
+          />
+        </div>
+        <div>
+          <h6 class="prise"> {{product.price}} ₺ </h6>
+          <button mat-raised-button color="accent" class="addtoCard">
+            Add To Card
+          </button>
+        </div>
       </nb-card>
     </nb-card-front>
     <nb-card-back>
-      <nb-card style="min-height: 400px;">
-        <nb-card-body > 
-        <h4> {{product.name}} </h4>
-        <hr>
-        <p> {{product.description}} </p>  
+      <nb-card>
+        <button
+          class="sideButton"
+          (click)="flipTheCard(product.name, product.id)"
+        >
+          <mat-icon>fast_forward</mat-icon>
+        </button>
+        <nb-card-body>
+          <h4>{{ product.name }}</h4>
+          <hr />
+          <p>{{ product.description }}</p>
         </nb-card-body>
       </nb-card>
     </nb-card-back>

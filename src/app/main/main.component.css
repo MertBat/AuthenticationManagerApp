@@ -1,11 +1,23 @@
 :host nb-layout-header ::ng-deep nav {
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 nb-card{
   border: 0 !important;
+  position: none !important;
 }
 
+nb-sidebar{
+  height: 50rem;
+  position: none !important;
+}
 
+.main-container .main-container-fixed{
+  position: none !important;
+}
+
+.menu-icon{
+  font-size: 35px;
+}
 
 
 

@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Account } from '../login/account';
 import { AccountService } from './account.service';
-import { AletifyService } from './aletify.service';
 import { Observable} from 'rxjs';
 import { RoleService } from './role.service';
+import { AlertifyService } from './alertify.service';
 
 @Injectable()
 export class ExaminationService {
@@ -13,7 +13,7 @@ export class ExaminationService {
   newUser: Account = new Account();
   constructor(
     private accountService: AccountService,
-    private alertifyService: AletifyService,
+    private alertifyService: AlertifyService,
     private router: Router,
     private roleService: RoleService
   ) {}

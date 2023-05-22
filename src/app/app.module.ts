@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginGuardService } from './services/login-guard.service';
-import { AletifyService } from './services/aletify.service';
 import { AccountService } from './services/account.service';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ExaminationService } from './services/examination.service';
@@ -15,6 +14,7 @@ import { SplashScreenComponent } from './splash-screen/splash-screen.component';
 import { ControlpanelGuardService } from './services/controlpanel-guard.service';
 import { ProductListService } from './services/product-list.service';
 import { CategoryService } from './services/category.service';
+import { AlertifyService } from './services/alertify.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,7 @@ import { CategoryService } from './services/category.service';
   ],
   providers: [
     LoginGuardService,
-    AletifyService,
+    AlertifyService,
     AccountService,
     ExaminationService,
     ControlpanelGuardService,
