@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CategoryList } from '../main/products/productList';
 import { Observable } from 'rxjs/internal/Observable';
@@ -7,11 +7,14 @@ import { Observable } from 'rxjs/internal/Observable';
   providedIn: 'root'
 })
 export class CategoryService {
-  path =  "https://authenticationapi20230501133914.azurewebsites.net/api/category"
+  path =  "https://localhost:5001/api/category"
   constructor(private http:HttpClient) { }
 
   getCategory():Observable<any>{
-    return this.http.get<CategoryList[]>(this.path)
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+    };
+    return this.http.get<CategoryList[]>(this.path, options)
   }
 
 }

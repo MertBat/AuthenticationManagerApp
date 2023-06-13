@@ -15,6 +15,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AlertifyService } from 'src/app/services/alertify.service';
+import { ExaminationService } from 'src/app/services/examination.service';
 
 @Component({
   selector: 'app-users',
@@ -50,28 +51,32 @@ export class UsersComponent implements OnInit {
     public matDialog: MatDialog,
     private roleService: RoleService,
     private alertifyService: AlertifyService,
-    private router: Router
+    private router: Router,
+    private examinationService: ExaminationService
   ) {}
   ngOnInit() {
-    this.refresh();
     this.roleService.getRoles().subscribe((data) => {
       if (Array.isArray(data)) {
         this.roles = data.map((d: Role) => {
           return d.roleName;
         });
+        this.refresh();
       }
+      
     });
-    const accountPermissions =
-      this.accountService.getAccountPermissions()[0].permissions;
-    this.addUserPermission = accountPermissions.some(
-      (p: any) => p == 'userAdd'
-    );
-    this.deleteUserPermission = accountPermissions.some(
-      (p: any) => p == 'userDelete'
-    );
-    this.editUserPermission = accountPermissions.some(
-      (p: any) => p == 'userChange'
-    );
+    
+    this.examinationService.getAccountPermissions().subscribe(perms=>{
+      this.addUserPermission = perms.some(
+        (p: any) => p == 'userAdd'
+      );
+      this.deleteUserPermission = perms.some(
+        (p: any) => p == 'userDelete'
+      );
+      this.editUserPermission = perms.some(
+        (p: any) => p == 'userChange'
+      );
+    })  
+    
   }
   refresh() {
     this.accountService.getAccounts().subscribe((data) => {
@@ -138,13 +143,15 @@ export class UsersComponent implements OnInit {
   }
 
   deleteRow(row: User) {
-    this.confirmation('delete').subscribe((result) => {
+    this.confirmation('delete').subscribe((result) => {  
       if (result) {
         this.accountService.deleteAccount(row.id!).subscribe(() => {
           this.datas = this.datas.filter((m: any) => m.id !== row.id);
           this.refresh();
           this.alertifyService.success('User successfuly deleted');
         });
+      }else{
+        this.alertifyService.error("Password incorect")
       }
     });
   }

@@ -26,35 +26,37 @@ export class UserEditComponent implements OnInit {
   selectedProperties!: any;
   selectedRole!: string;
   roleButtonCondition = true;
+  accountAccess!:boolean;
 
   constructor(
     private formBuilder: FormBuilder,
     private examinationService: ExaminationService,
     private accountService: AccountService,
     private route: ActivatedRoute,
-    private roleService: RoleService,
+    private roleService: RoleService
   ) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
-      this.accountId = params['id'];
+      this.accountId = parseInt(params['id']);
     });
     this.accountService.getAccounts(this.accountId).subscribe((data) => {
       this.account = data;
-      this.tableReady = true;
-      this.selectedRole= this.account.authority;
+      this.selectedRole = this.account.authority;
       this.uInformationformExamination();
+      this.roleService.getRoles().subscribe((data: any) => {
+        this.permissions = data.filter((d: Role) => {
+          return d.roleName == this.account.authority;
+        })[0].permissions;
+        this.roles = data.map((d: Role) => {
+          return d.roleName;
+        });
+        this.tableReady = true;
+      });
     });
-    this.roleService.getRoles().subscribe((data: any) => {
-      this.permissions = data.filter((d: Role) => {
-        return d.roleName == this.account.authority;
-      })[0].permissions;
-      this.roles = data.map((d:Role)=>{
-        return d.roleName;
-      })
-    });
+    this.accountAuthority()
+    
   }
-
 
   permission() {
     this.selectedProperties = this.roleProperties.filter((d: any) => {
@@ -62,16 +64,14 @@ export class UserEditComponent implements OnInit {
     });
   }
 
-  selectboxValueChange(){
+  selectboxValueChange() {
     this.roleService.getRoles().subscribe((data: any) => {
       this.permissions = data.filter((d: Role) => {
         return d.roleName == this.selectedRole;
       })[0].permissions;
-      
     });
-    this.permissions = [...this.permissions]
+    this.permissions = [...this.permissions];
     this.roleButtonCondition = false;
-    
   }
 
   uInformationformExamination() {
@@ -82,12 +82,12 @@ export class UserEditComponent implements OnInit {
       profileFoto: [this.account.url],
       password: [this.account.password, Validators.required],
     });
-  } 
+  }
 
   changeInformation() {
     if (this.uInformationForm.valid) {
       this.userInfo = Object.assign({}, this.uInformationForm.value);
-      this.examinationService.userInfoChange(this.userInfo,this.accountId);
+      this.examinationService.userInfoChange(this.userInfo, this.accountId);
     }
   }
 
@@ -96,10 +96,12 @@ export class UserEditComponent implements OnInit {
   }
 
   accountAuthority() {
-    if (this.accountService.avalibleAccount().authority == 'admin') {
-      return true;
-    } else {
-      return false;
-    }
+    this.accountService.avalibleAccount().subscribe((data) => {
+      if (data.authority == 'admin') {
+        this.accountAccess =  true;
+      } else {
+        this.accountAccess= false;
+      }
+    });
   }
 }

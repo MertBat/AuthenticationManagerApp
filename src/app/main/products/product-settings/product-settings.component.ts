@@ -6,6 +6,7 @@ import { ProductList } from '../productList';
 import { MatTableDataSource } from '@angular/material/table';
 import { AccountService } from 'src/app/services/account.service';
 import { AlertifyService } from 'src/app/services/alertify.service';
+import { ExaminationService } from 'src/app/services/examination.service';
 
 declare let alertify: any;
 
@@ -26,23 +27,25 @@ export class ProductSettingsComponent implements OnInit {
 
   constructor(
     private productListService: ProductListService,
-    private accountService: AccountService,
+    private examinationService: ExaminationService,
     public dialog: MatDialog,
     private alertifyService:AlertifyService
   ) {}
 
   ngOnInit(): void {
     const accountPermissions =
-      this.accountService.getAccountPermissions()[0].permissions;
-    this.addProductPermission = accountPermissions.some(
-      (p: any) => p == 'addProduct'
-    );
-    this.editProductPermission = accountPermissions.some(
-      (p: any) => p == 'changeProduct'
-    );
-    this.deleteProductPermission = accountPermissions.some(
-      (p: any) => p == 'removeProduct'
-    );
+      this.examinationService.getAccountPermissions().subscribe(perms=>{
+        this.addProductPermission = perms.some(
+          (p: any) => p == 'addProduct'
+        );
+        this.editProductPermission = perms.some(
+          (p: any) => p == 'changeProduct'
+        );
+        this.deleteProductPermission = perms.some(
+          (p: any) => p == 'removeProduct'
+        );
+      })
+    
     this.refresh();
   }
 

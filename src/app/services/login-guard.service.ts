@@ -6,21 +6,21 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { AccountService } from './account.service';
 import { AlertifyService } from './alertify.service';
+import { ExaminationService } from './examination.service';
 
 @Injectable()
 export class LoginGuardService implements CanActivate {
 
-  constructor(private alertifyService: AlertifyService,private accountService: AccountService, private router: Router) {
+  constructor(private alertifyService: AlertifyService,private examinationService: ExaminationService, private router: Router) {
   }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    const permission = this.accountService.getLoginPermission();
-    if (permission) {
+    const tokenInStorage = localStorage.getItem("token");
+    if (tokenInStorage) {
       return true;
     } else {
       this.router.navigate(['login']);

@@ -14,42 +14,42 @@ export class ProfileComponent implements OnInit {
   Information: any;
   PasswordChangeForm!: FormGroup;
   passwords: any;
-  userInfo:any
+  userInfo: any;
   selectedItem!: string;
   accounts!: Account[];
   administratorCheck!: boolean;
-  profileFoto = this.accountService.avalibleAccount().url
-  userName = this.accountService.avalibleAccount().userName;
-  userSurname = this.accountService.avalibleAccount().userSurname
-  eMail = this.accountService.avalibleAccount().eMail
+  profileFoto?: string;
+  name?: string;
+  surname?: string;
+  eMail?: string;
+  cardReady = false
 
   constructor(
     private formBuilder: FormBuilder,
     private examinationService: ExaminationService,
-    private accountService: AccountService,
-  ) { }
+    private accountService: AccountService
+  ) {}
 
   ngOnInit() {
-    this.uInformationformExamination();
+    
     this.PasswordChangeFormExamination();
-    // this.accountService.getAccounts(this.accountService.avalibleAccount()!).subscribe((data) => {
-    //   if (data[0].authority == 'admin' ) {
-    //     this.administratorCheck = true;
-    //   } else {
-    //     this.administratorCheck = false;
-    //   }
-    // });
-    this.accountService.getAccounts().subscribe((data) => {
+    this.accountService.getAccounts().subscribe((data) => {});
+    this.accountService.avalibleAccount().subscribe((res) => {
+      this.profileFoto = res.url;
+      this.name = res.name;
+      this.surname = res.surname;
+      this.eMail = res.eMail;
+      this.uInformationformExamination();
+      this.cardReady = true
     });
   }
 
   uInformationformExamination() {
-
     this.uInformationForm = this.formBuilder.group({
-      userName: [this.userName, Validators.required],
-      usersurname: [this.userSurname, Validators.required],
+      name: [this.name, Validators.required],
+      surname: [this.surname, Validators.required],
       eMail: [this.eMail, Validators.required],
-      profileFoto: [this.profileFoto, Validators.required]
+      profileFoto: [this.profileFoto, Validators.required],
     });
   }
   PasswordChangeFormExamination() {
@@ -63,7 +63,10 @@ export class ProfileComponent implements OnInit {
   changeInformation() {
     if (this.uInformationForm.valid) {
       this.userInfo = Object.assign({}, this.uInformationForm.value);
-      this.examinationService.userInfoChange(this.userInfo, this.accountService.avalibleAccount().name);
+      this.accountService.avalibleAccount().subscribe(data=>{
+        this.examinationService.userInfoChange(this.userInfo, data.id);
+      })
+      
     }
   }
   changePassword() {

@@ -8,14 +8,13 @@ import {
 } from '@nebular/theme';
 import { filter, map } from 'rxjs/operators';
 import { AccountService } from '../services/account.service';
+import { ExaminationService } from '../services/examination.service';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css'],
 })
 export class MainComponent {
-  name!: string;
-  surname!: string;
   fullName!: string;
   url!: string;
   items = [{ title: 'Profile' }, { title: 'Logout' }];
@@ -26,12 +25,19 @@ export class MainComponent {
     private sidebarService: NbSidebarService,
     private router: Router,
     private accountService: AccountService,
-    private route: ActivatedRoute
+    private examinationService:ExaminationService,
   ) {}
 
   ngOnInit() {
-    this.name = this.accountService.avalibleAccount().name;
-    this.surname = this.accountService.avalibleAccount().surname;
+    this.accountService.avalibleAccount().subscribe(data=>{
+      this.url=data.url;
+       this.fullName =
+      data.name.charAt(0).toUpperCase() +
+      data.name.slice(1) +
+      ' ' +
+      data.surname.charAt(0).toUpperCase() +
+      data.surname.slice(1);
+    });
     this.nbMenuService
       .onItemClick()
       .pipe(
@@ -39,14 +45,8 @@ export class MainComponent {
         map(({ item: { title } }) => 'main/' + title.toLocaleLowerCase())
       )
       .subscribe((title) => this.router.navigateByUrl(title));
-    this.fullName =
-      this.name.charAt(0).toUpperCase() +
-      this.name.slice(1) +
-      ' ' +
-      this.surname.charAt(0).toUpperCase() +
-      this.surname.slice(1);
-    this.url = this.accountService.avalibleAccount().url;
   }
+
   toggle() {
     this.sidebarService.toggle();
   }
@@ -78,7 +78,7 @@ export class MainComponent {
         {
           title: 'Product Settings',
           link: 'product-settings',
-          hidden: !this.accountService.getPermissionToControlPanel(),
+          hidden: !this.examinationService.getPermissionToControlPanel(),
         },
       ],
     },
@@ -89,7 +89,7 @@ export class MainComponent {
     {
       title: 'Control Panel',
       expanded: false,
-      hidden: !this.accountService.getPermissionToControlPanel(),
+      hidden: !this.examinationService.getPermissionToControlPanel(),
       children: [
         {
           title: 'Users',

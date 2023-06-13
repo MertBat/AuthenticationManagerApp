@@ -8,7 +8,7 @@ import { Role } from '../main/users/userTable';
   providedIn: 'root',
 })
 export class RoleService {
-  path = 'https://authenticationapi20230501133914.azurewebsites.net/api/Role';
+  path = 'https://localhost:5001/api/Role';
   constructor(private http: HttpClient) {}
 
   getRoles(): Observable<Role> {
@@ -16,28 +16,26 @@ export class RoleService {
   }
 
   postRole(data: Role): Observable<Role> {
-    // const httpOptions = {
-    //   headers: new HttpHeaders({
-    //     'Content-Type': 'application/json',
-    //     Authorization: 'Token',
-    //   }),
-    // };
-    return this.http.post<Role>(this.path, data);
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+    };
+    return this.http.post<Role>(this.path, data,options);
   }
   putRoles(data:Role, id:number):Observable<any>{
     const newPath = this.path + "/" + id;
-    // const httpOptions = {
-    //   headers: new HttpHeaders({
-    //     'Content-Type': 'application/json',
-    //     Authorization: 'Token',
-    //   }),
-    // };
-    console.log()
-    return this.http.put(newPath,data);
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+    };
+    return this.http.put(newPath,data, options);
   }
 
   deleteRole(id:number):Observable<any>{
     const newPath = this.path + "/" + id;
-    return this.http.delete(newPath);
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+    };
+    return this.http.delete(newPath, options);
   }
+
+  
 }

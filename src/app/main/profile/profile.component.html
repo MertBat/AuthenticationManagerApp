@@ -1,5 +1,5 @@
 <h2>Profile information</h2>
-<nb-card class="card">
+<nb-card class="card" *ngIf="cardReady">
   <nb-card-body>
     <nb-tabset>
       <nb-tab tabTitle="Users Information">
@@ -57,7 +57,7 @@
               id="email"
               placeholder="E-Mail"
               name="eMail"
-              formControlName="email"
+              formControlName="eMail"
             />
             <div
               class="alert alert-danger p-1"

@@ -7,6 +7,7 @@ import { finalize, from } from 'rxjs';
 import { RoleService } from '../services/role.service';
 import { AlertifyService } from '../services/alertify.service';
 import { Role } from '../main/users/userTable';
+import { AccountService } from '../services/account.service';
 
 @Component({
   selector: 'app-login',
@@ -29,10 +30,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private examinationService: ExaminationService,
-    private roleService: RoleService,
-    private alertifyService: AlertifyService,
-
-  ) { }
+  ) {}
 
   navigateSignUp() {
     this.router.navigateByUrl('/signUp');
@@ -40,9 +38,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.accountExamination();
-    localStorage.removeItem('account');
-    sessionStorage.removeItem('account');
-    localStorage.removeItem('permissions');
+    this.examinationService.logOut();
   }
 
   accountExamination() {
@@ -56,21 +52,9 @@ export class LoginComponent implements OnInit {
     if (this.examinationForm.valid) {
       this.loading = true;
       this.loginData = Object.assign({}, this.examinationForm.value);
-      from(this.examinationService.signIn(this.loginData)).pipe(
-        finalize(() => {
-          this.loading = false;
-        })
-      ).subscribe(res => {
-        this.router.navigateByUrl('/main/home');
-        sessionStorage.setItem("account", "true");
-        localStorage.setItem('account', JSON.stringify(res));
-        this.roleService.getRoles().subscribe((data:any) => {
-          const permissions = data.filter((d:Role)=> d.roleName == res.authority)
-          localStorage.setItem("permissions", JSON.stringify(permissions));
-        })
-      },e=>{
-        debugger;
-        this.alertifyService.error(e.error);
+      this.examinationService.signIn(this.loginData).then((res: boolean) => {
+      }).catch((res:boolean)=>{
+        this.loading = res;
       });
     }
   }

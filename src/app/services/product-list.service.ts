@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ProductList } from '../main/products/productList';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
 @Injectable()
 export class ProductListService {
-  path = "https://authenticationapi20230501133914.azurewebsites.net/api/product";
+  path = "https://localhost:5001/api/product";
 
   constructor(private http: HttpClient) { }
 
@@ -17,21 +17,33 @@ export class ProductListService {
     } else {
       newPath = this.path
     }
-    return this.http.get<ProductList>(newPath);
+    let options = {
+      headers: new HttpHeaders().set("Content-Type", "application/json")
+    }
+    return this.http.get<ProductList>(newPath, options);
   }
 
   postProductList(data: ProductList): Observable<ProductList> {
-    return this.http.post<ProductList>(this.path, data);
+    let options = {
+      headers: new HttpHeaders().set("Content-Type", "application/json")
+    }
+    return this.http.post<ProductList>(this.path, data, options);
   }
 
   putProductList(data: any, id: number): Observable<any> {
     const newPath = this.path + "/" + id;
-    return this.http.put<ProductList>(newPath, data);
+    let options = {
+      headers: new HttpHeaders().set("Content-Type", "application/json")
+    }
+    return this.http.put<ProductList>(newPath, data, options);
   }
 
   deleteProductList(id: number): Observable<any> {
     const newpath = this.path + "/" + id;
-    return this.http.delete(newpath);
+    let options = {
+      headers: new HttpHeaders().set("Content-Type", "application/json")
+    }
+    return this.http.delete(newpath, options);
   }
 
 

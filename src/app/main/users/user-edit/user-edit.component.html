@@ -39,7 +39,7 @@
           </button>
         </form>
       </nb-tab>
-      <nb-tab tabTitle="Change Role" *ngIf="accountAuthority()">
+      <nb-tab tabTitle="Change Role" *ngIf="accountAccess">
         <mat-form-field style="width: 15%; min-width: 100px;">
           <mat-label>Role</mat-label>
           <mat-select [(value)]="selectedRole" (valueChange)="selectboxValueChange()">

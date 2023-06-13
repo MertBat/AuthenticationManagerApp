@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { AccountService } from 'src/app/services/account.service';
 import { ExaminationService } from 'src/app/services/examination.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class ConfirmComponent implements OnInit{
     public dialogRef: MatDialogRef<ConfirmComponent>,
     @Inject(MAT_DIALOG_DATA) public data: boolean,
     private formBuilder:FormBuilder,
-    private examinationService:ExaminationService
+    private accountService:AccountService
     ) {}
 
   ngOnInit() {
@@ -35,7 +36,14 @@ export class ConfirmComponent implements OnInit{
     this.dialogRef.close();
   }
   confirm(){
-    this.dialogRef.close(this.examinationService.passwordCheck(this.confirmForm.value.password)); 
+    this.accountService.avalibleAccount().subscribe((data) => {
+      if (data.password == this.confirmForm.value.password) {
+        this.dialogRef.close(true)
+      } else {
+        this.dialogRef.close(false)
+      }
+    });
+    
   }
   
 }

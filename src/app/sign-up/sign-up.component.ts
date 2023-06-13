@@ -3,8 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ExaminationService } from '../services/examination.service';
-import { finalize, from } from 'rxjs';
-
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -46,7 +44,6 @@ export class SignUpComponent implements OnInit {
       this.loading = true
       this.signUpData =Object.assign({}, this.signUpForm.value);
       this.examinationService.signUp(this.signUpData)
-      
     }
   }
 }

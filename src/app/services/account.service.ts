@@ -1,40 +1,49 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Account } from '../login/account';
+import { JwtService } from './jwt.service';
+import { User } from '../main/users/userTable';
 
 @Injectable()
 export class AccountService {
-  path = 'https://authenticationapi20230501133914.azurewebsites.net/api/';
+  path = 'https://localhost:5001/api/';
   getAccount: any;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private jwtService: JwtService) {}
   permision!: boolean;
 
   signIn(data: Account): Observable<any> {
-    return this.http.post(this.path + 'Account/signin', {
-      userName: data.name,
-      password: data.password,
-    });
+    const url = this.path + 'account/signin';
+    const body = { userName: data.name, password: data.password };
+    return this.http.post(url, body);
   }
 
   signUp(data: any): Observable<any> {
+    debugger;
     return this.http.post(this.path + 'Account/signup', {
       username: data.name,
-      password: data.password,
-      password1: data.password1,
+      password: data.password1,
+      password1: data.password2,
     });
   }
 
   getAccounts(id?: number): Observable<any> {
     let newPath = this.path + 'User';
-    if (id) {
-      newPath = newPath + '/' + id;
+    console.log(id);
+    if (typeof(id) == "number") {
+      newPath = `${newPath}/${id}`;
     }
-    return this.http.get<Account[]>(newPath);
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+    };
+    return this.http.get<Account[]>(newPath, options);
   }
 
   postAccount(data: any): Observable<Account> {
-    return this.http.post<Account>(this.path + 'User', data);
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+    };
+    return this.http.post<Account>(this.path + 'User', data, options);
   }
 
   putAccount(data: any, id: number): Observable<any> {
@@ -45,37 +54,22 @@ export class AccountService {
     //   }),
     // };
     const newPath = this.path + 'User/' + id;
-    return this.http.put(newPath, data);
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+    };
+    return this.http.put(newPath, data, options);
   }
 
   deleteAccount(id: number): Observable<any> {
     const newpath = this.path + 'User/' + id;
-    return this.http.delete(newpath);
-  }
-
-  getPermissionToControlPanel() {
-    const permision = JSON.parse(localStorage.getItem('account')!);
-    if (permision.authority !== 'user') {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  getLoginPermission() {
-    const permission = sessionStorage.getItem('account');
-    if (permission) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  getAccountPermissions() {
-    return JSON.parse(localStorage.getItem('permissions')!);
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+    };
+    return this.http.delete(newpath, options);
   }
 
   avalibleAccount() {
-    return JSON.parse(localStorage.getItem('account')!);
+    const user = this.jwtService.decodeToken();
+    return this.getAccounts(user.id);
   }
 }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -15,6 +15,9 @@ import { ControlpanelGuardService } from './services/controlpanel-guard.service'
 import { ProductListService } from './services/product-list.service';
 import { CategoryService } from './services/category.service';
 import { AlertifyService } from './services/alertify.service';
+import { JwtService } from './services/jwt.service';
+import { Interceptors } from './app.import';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +41,9 @@ import { AlertifyService } from './services/alertify.service';
     ExaminationService,
     ControlpanelGuardService,
     ProductListService,
-    CategoryService
+    CategoryService,
+    JwtService,
+    Interceptors
   ],
   bootstrap: [AppComponent],
 })
